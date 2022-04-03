@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[100px] flex justify-between border-[#e4e4e4] border-x-0 border-b-2">
+  <section class="h-[100px] flex  border-[#e4e4e4] border-x-0 border-b-2">
     <div class="bg-secondary flex items-center w-[272px] justify-center">
       <span>
         <svg
@@ -53,7 +53,7 @@
 
     <Search />
 
-    <div class="flex items-center">
+    <div class="flex items-center ml-[50px]">
       <span>
         <globe-icon />
       </span>
@@ -113,7 +113,7 @@
       </div>
     </div>
 
-        <div class="bg-secondary flex items-center w-[272px] justify-center">
+        <div class="bg-secondary flex items-center w-[272px] justify-center ml-auto">
  
 
            <a href="" class=" bg-primary text-white px-6 py-4 cursor-pointer">
