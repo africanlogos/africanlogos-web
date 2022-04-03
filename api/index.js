@@ -2,27 +2,29 @@ const fs = require('fs');
 
 const pathToDirectory = './assets/icons';
 
-const categorieList = fs.readdirSync(pathToDirectory, { withFileTypes: true })
+let result = {}
+
+const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     .filter((item) => item.isDirectory())
     .map((item) => item.name);
 
 
 
 
+    for (const categorie of categories) {
+         const dir = pathToDirectory + '/' + categorie;
+         try {
+            const files = fs.readdirSync(dir);
+            result[categorie] = files
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    console.log(categorieList);
 
+    const app = require('express')()
+    module.exports = { path: '/api', handler: app }
 
-
-
-
-
-
-console.log('Starting the API');
-
-const app = require('express')()
-module.exports = { path: '/api', handler: app }
-
-app.get('/hello', (req, res) => {
-  res.json({ data: 'Hello World' })
-})
+    app.get('/categories', (req, res) => {
+    res.json({ datas: categories,result })
+    })
