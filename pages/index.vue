@@ -1,6 +1,7 @@
 <template>
  <section>
      <Banner />
+     <Header />
  </section>
 </template>
 
