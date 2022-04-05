@@ -2,6 +2,13 @@
  <section>
      <Banner />
      <Header />
+
+     <section>
+       <LeftBar />
+         
+     </section>
+
+
  </section>
 </template>
 
