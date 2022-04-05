@@ -1,7 +1,11 @@
 <template>
-  <section class=" bg-secondary max-w-[272px]">
+  <section class="bg-secondary w-[272px]">
     <div>
-      <span @click="activeSection = 0" :class="activeSection === 0 ? 'active text-white' : ' text-primary'" class=" flex justify-between px-5 py-[10px] cursor-pointer">
+      <span
+        @click="activeSection = 0"
+        :class="activeSection === 0 ? 'active text-white' : ' text-primary'"
+        class="flex justify-between px-5 py-[10px] cursor-pointer"
+      >
         <svg
           width="24"
           height="24"
@@ -17,7 +21,11 @@
         Ajout récents
       </span>
 
-      <span @click="activeSection = 1" :class="activeSection === 1 ? 'active text-white' : ' text-primary'" class=" flex justify-between px-5 py-[10px] cursor-pointer">
+      <span
+        @click="activeSection = 1"
+        :class="activeSection === 1 ? 'active text-white' : ' text-primary'"
+        class="flex justify-between px-5 py-[10px] cursor-pointer"
+      >
         <svg
           width="24"
           height="24"
@@ -34,7 +42,11 @@
         Contributeurs
       </span>
 
-      <span @click="activeSection = 2" :class="activeSection === 2 ? 'active text-white' : ' text-primary'" class=" flex justify-between px-5 py-[10px] cursor-pointer">
+      <span
+        @click="activeSection = 2"
+        :class="activeSection === 2 ? 'active text-white' : ' text-primary'"
+        class="flex justify-between px-5 py-[10px] cursor-pointer"
+      >
         <svg
           width="24"
           height="24"
@@ -52,14 +64,22 @@
       </span>
     </div>
     <div>
-      <h4 class=" px-5 py-[10px] text-primary opacity-50">Catégories</h4>
+      <h4 class="px-5 py-[10px] text-primary opacity-50">Catégories</h4>
 
-      <div class=" overflow-scroll h-screen">
-        <div :class="activeCategories === index ? 'active text-white' : 'text-primary'" @click=" activeCategories = index " class=" flex justify-between  px-5 py-[10px] cursor-pointer" v-for="(cat, index) in categories" :key="index">
-          <span class="   ">
-            {{ cat }}
+      <div class="overflow-scroll h-screen">
+        <div
+          :class="
+            activeCategories === index ? 'active text-white' : 'text-primary'
+          "
+          @click="activeCategories = index"
+          class="flex justify-between px-5 py-[10px] cursor-pointer"
+          v-for="(cat, index) in categories"
+          :key="index"
+        >
+          <span class="">
+            {{ cat.name }}
           </span>
-          <span class=" "> 21 </span>
+          <span class=""> {{ cat.count }} </span>
         </div>
       </div>
     </div>
@@ -68,27 +88,31 @@
 
 <script>
 export default {
-    data(){
-        return {
-            activeCategories: -1,
-            activeSection: -1,
-            categories: ['Agritech','Analytics','Art Gallery','Automotive','Baby Goods','Beauty','Books','Cameras','Clothing','Computers','Electronics','Food','Furniture','Grocery','Health','Home','Industrial','Jewelry','Kindle Store','Luggage','Luxury Beauty','Movies & TV','Musical Instruments','Office Products','Pet Supplies','Shoes','Software','Sports & Outdoors','Tools','Toys','Video Games','Watches','Wireless','Wireless Accessories']
-        }
-    }
+ props: {
+     categories: {
+         type: Array,
+         default: []
+     }
+ },
+  data() {
+    return {
+      activeCategories: -1,
+      activeSection: -1,
+    };
+  },
 };
 </script>
 
 <style scoped>
-
 .active {
-    background: linear-gradient(91.16deg, #3D6F35 0%, #C5A811 100%);
+  background: linear-gradient(91.16deg, #3d6f35 0%, #c5a811 100%);
 }
 
 .active svg {
-    fill: white;
+  fill: white;
 }
 
 .active svg path {
-    fill: white;
+  fill: white;
 }
 </style>

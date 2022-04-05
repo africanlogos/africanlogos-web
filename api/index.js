@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const pathToDirectory = './assets/icons';
 
-let result = {}
+let results = {}
 
 const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     .filter((item) => item.isDirectory())
@@ -15,7 +15,7 @@ const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
          const dir = pathToDirectory + '/' + categorie;
          try {
             const files = fs.readdirSync(dir);
-            result[categorie] = files
+            results[categorie] = files
         } catch (err) {
             console.log(err);
         }
@@ -26,5 +26,5 @@ const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     module.exports = { path: '/api', handler: app }
 
     app.get('/categories', (req, res) => {
-    res.json({ datas: categories,result })
+    res.json({ datas: categories,results })
     })
