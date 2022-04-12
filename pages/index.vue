@@ -6,6 +6,7 @@
     <section class="flex">
       <LeftBar :categories="categories" />
       <Main :results="results" />
+      <RightBar />
     </section>
   </section>
 </template>
@@ -19,7 +20,7 @@ export default {
     };
   },
   async mounted() {
-    const response = await fetch("http://localhost:58803/api/categories");
+    const response = await fetch("http://localhost:3000/api/categories");
 
     const data = await response.json();
 
