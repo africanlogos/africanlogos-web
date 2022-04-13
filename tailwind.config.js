@@ -9,7 +9,7 @@
     colors: {
       primary: '#3D6F35',
       secondary: '#F7F5EE',
-      white:'white',
+      white:'#FFFFFF',
       black:'black'
     },
     fontFamily:{

@@ -1,5 +1,23 @@
 <template>
-  <section :class=" index === 0 ? 'banner-first-slide-bg' : 'banner-second-slide-bg' " class="bg-[#C5A811] banner h-60 p-4 justify-between">
+  <section
+    :class="index === 0 ? 'banner-first-slide-bg' : 'banner-second-slide-bg'"
+    class="bg-[#C5A811] banner h-60 p-4 justify-between"
+  >
+    <span class="close absolute right-[50px] top-[40px] cursor-pointer z-30">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.41406 0L0 1.41406L7.29297 8.70703L0 16L1.41406 17.4141L8.70703 10.1211L16 17.4141L17.4141 16L10.1211 8.70703L17.4141 1.41406L16 0L8.70703 7.29297L1.41406 0Z"
+          fill="white"
+        />
+      </svg>
+    </span>
+
     <div class="relative h-[86px]">
       <h1
         class="
@@ -62,10 +80,16 @@
         </p>
       </div>
 
-      <div>
-        <div class="flex relative">
-          <p class="text-white countries-title">Pays disponibles</p>
-
+      <div class="relative left-[25px]">
+        <p class="text-white countries-title relative top-[-10px]">
+          {{ index === 0 ? "Pays disponibles" : "Contributeurs" }}
+        </p>
+        <div
+          class="flex relative transition-all duration-[.8s]"
+          :class="
+            index === 0 ? ' opacity-100' : ' opacity-0 translate-x-[-30px]'
+          "
+        >
           <span
             :style="`left:${index * -32}px`"
             v-for="(flag, index) in flagsList"
@@ -76,6 +100,36 @@
           </span>
 
           <span class="text-white font-bold rest-countries"> + 2 </span>
+        </div>
+
+        <div
+          class="
+            flex
+            relative
+            z-20
+            contributors
+            opacity-0
+            transition-all
+            duration-[.8s]
+            translate-x-[50px]
+          "
+          :class="index === 0 ? '' : 'active-banner'"
+        >
+          <!-- <p class="text-white countries-title">Contributeurs</p> -->
+
+          <span
+            :style="`left:${index * -32}px`"
+            v-for="(avatar, index) in avatarList"
+            :key="avatar"
+            class="absolute"
+          >
+            <img
+              :src="avatar"
+              class="w-10 h-10 rounded-full border border-[#C4C4C4]"
+            />
+          </span>
+
+          <!-- <span class="text-white font-bold rest-countries"> + 2 </span> -->
         </div>
       </div>
     </div>
@@ -113,6 +167,16 @@ export default {
         "algeria-flags",
         "togo-flags",
       ].reverse(),
+
+      avatarList: [
+        "https://www.generatormix.com/images/anime-character/kushina-uzumaki.jpg",
+        "https://www.generatormix.com/images/anime-character/hisoka.jpg",
+        "https://www.generatormix.com/images/anime-character/killua-zaoldyeck.jpg",
+        "https://www.generatormix.com/images/anime-character/mikasa.jpg",
+        "https://www.generatormix.com/images/anime-character/sai.jpg",
+        "https://www.generatormix.com/images/anime-character/monkey-d.-luffy.jpg",
+        "https://www.generatormix.com/images/anime-character/minato-namikaze.jpg",
+      ].reverse(),
     };
   },
 
@@ -137,7 +201,7 @@ export default {
 }
 
 .banner-first-slide-bg {
-  background: linear-gradient(to right,#aa951b,#aa951b,#336234),
+  background: linear-gradient(to right, #aa951b, #aa951b, #336234),
     url("../assets/images/banner.png");
 }
 
@@ -156,5 +220,11 @@ export default {
   position: absolute;
   right: 30px;
   top: 8px;
+}
+
+.contributors.active-banner {
+  transform: translateX(0px);
+  opacity: 1;
+  /* transition: all 5s; */
 }
 </style>

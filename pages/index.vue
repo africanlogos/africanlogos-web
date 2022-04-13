@@ -4,10 +4,17 @@
     <Header />
 
     <section class="flex">
-
-      <LeftBar @filter-by-category="filterBycategories" :categories="categories" />
+      <LeftBar
+        @filter-by-category="filterBycategories"
+        :categories="categories"
+      />
       <Main @get-svg="getSvg" :results="filteredResults" />
-      <RightBar :currentSvg="currentSvg" :name="selectedName" :categorie="selectedCategory" :logo="selectedLogo" />
+      <RightBar
+        :currentSvg="currentSvg"
+        :name="selectedName"
+        :categorie="selectedCategory"
+        :logo="selectedLogo"
+      />
     </section>
   </section>
 </template>
@@ -18,12 +25,12 @@ export default {
     return {
       results: [],
       categories: [],
-      selectedCategory: '',
-      selectedLogo: '',
-      currentSvg: '',
-      selectedName: '',
+      selectedCategory: "",
+      selectedLogo: "",
+      currentSvg: "",
+      selectedName: "",
 
-      filterCategory: '',
+      filterCategory: "",
     };
   },
   async mounted() {
@@ -58,7 +65,9 @@ export default {
   computed: {
     filteredResults() {
       return this.results.filter((result) => {
-        return result.categorie.toLowerCase().includes(this.filterCategory.toLowerCase());
+        return result.categorie
+          .toLowerCase()
+          .includes(this.filterCategory.toLowerCase());
       });
     },
   },
@@ -68,30 +77,21 @@ export default {
       this.selectedCategory = result.categorie;
       this.selectedLogo = result.logo;
       this.selectedName = result.name;
-      
-
 
       fetch(require(`@/assets/icons/${result.categorie}/${result.logo}`))
         .then((response) => response.text())
         .then((text) => {
           this.currentSvg = text;
         });
-
     },
     filterBycategories(categorie) {
-         this.filterCategory = categorie.name;
+      this.filterCategory = categorie.name;
 
-
-
-
-
-
-
-               this.selectedCategory = ''
-      this.selectedLogo = ''
-      this.currentSvg = ''
-      this.selectedName = ''
+      this.selectedCategory = "";
+      this.selectedLogo = "";
+      this.currentSvg = "";
+      this.selectedName = "";
     },
-  }
+  },
 };
 </script>
