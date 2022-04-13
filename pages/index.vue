@@ -4,9 +4,10 @@
     <Header />
 
     <section class="flex">
-      <LeftBar :categories="categories" />
-      <Main @get-svg="getSvg" :results="results" />
-      <RightBar :currentSvg="currentSvg" :categorie="selectedCategory" :logo="selectedLogo" />
+      <!-- {{ filteredResults }} -->
+      <LeftBar @filter-by-category="filterBycategories" :categories="categories" />
+      <Main @get-svg="getSvg" :results="filteredResults" />
+      <RightBar :currentSvg="currentSvg" :name="selectedName" :categorie="selectedCategory" :logo="selectedLogo" />
     </section>
   </section>
 </template>
@@ -20,6 +21,9 @@ export default {
       selectedCategory: '',
       selectedLogo: '',
       currentSvg: '',
+      selectedName: '',
+
+      filterCategory: '',
     };
   },
   async mounted() {
@@ -28,11 +32,6 @@ export default {
     const data = await response.json();
 
     let results = data.results;
-
-    console.log(data.datas, "list");
-
-    // this.categories = 
-    //data.datas;
 
     let finalResult = [];
 
@@ -54,22 +53,33 @@ export default {
     }
 
     this.results = finalResult;
+    console.log(this.results);
+  },
+  computed: {
+    filteredResults() {
+      return this.results.filter((result) => {
+        return result.categorie.toLowerCase().includes(this.filterCategory.toLowerCase());
+      });
+    },
   },
   methods: {
     getSvg(result) {
       console.log(result);
       this.selectedCategory = result.categorie;
       this.selectedLogo = result.logo;
+      this.selectedName = result.name;
+      
 
 
       fetch(require(`@/assets/icons/${result.categorie}/${result.logo}`))
         .then((response) => response.text())
         .then((text) => {
           this.currentSvg = text;
-          console.log(text);
-          // this.$emit("get-svg", text);
         });
-      // this.$emit("get-svg", result);
+
+    },
+    filterBycategories(categorie) {
+         this.filterCategory = categorie.name;
     },
   }
 };

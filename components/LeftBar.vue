@@ -71,7 +71,7 @@
           :class="
             activeCategories === index ? 'active text-white' : 'text-primary'
           "
-          @click="activeCategories = index"
+          @click="getCategories(cat,index)"
           class="flex justify-between px-5 py-[10px] cursor-pointer"
           v-for="(cat, index) in categories"
           :key="index"
@@ -99,6 +99,16 @@ export default {
       activeCategories: -1,
       activeSection: -1,
     };
+  },
+
+
+  methods: {
+    getCategories(categorie,index) {
+      this.activeCategories = index
+      console.log(categorie);
+      this.$emit('filter-by-category', categorie)
+            // this.$store.dispatch('getCategories');
+    },
   },
 };
 </script>
