@@ -4,7 +4,7 @@
     <Header />
 
     <section class="flex">
-      <!-- {{ filteredResults }} -->
+
       <LeftBar @filter-by-category="filterBycategories" :categories="categories" />
       <Main @get-svg="getSvg" :results="filteredResults" />
       <RightBar :currentSvg="currentSvg" :name="selectedName" :categorie="selectedCategory" :logo="selectedLogo" />

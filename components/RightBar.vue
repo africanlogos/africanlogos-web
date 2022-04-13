@@ -1,100 +1,125 @@
 <template>
   <section class="bg-secondary w-[272px] p-6">
-    <h4 class="text-[16px] text-center mt-[22px]"> <span class=" capitalize">{{ name }} </span> ∙ NG ∙ Bank</h4>
+    <div v-if="categorie">
+      <h4 class="text-[16px] text-center mt-[22px]">
+        <span class="capitalize">{{ name }} </span> ∙ NG ∙ Bank
+      </h4>
 
-    <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
+      <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
 
-    <div v-if="categorie" class="bg-white grid place-items-center mb-6">
-      <img
-        :src="require(`@/assets/icons/${categorie}/${logo}`)"
-        alt=""
-        srcset=""
-      />
-    </div>
+      <div v-if="categorie" class="bg-white grid place-items-center mb-6">
+        <img
+          :src="require(`@/assets/icons/${categorie}/${logo}`)"
+          alt=""
+          srcset=""
+        />
+      </div>
 
-    <div class="flex items-center">
-      <h6 class="text-primary mr-4 whitespace-nowrap">Variantes :</h6>
+      <div class="flex items-center">
+        <h6 class="text-primary mr-4 whitespace-nowrap">Variantes :</h6>
 
-      <span
-        v-for="(variant, index) in variantes"
-        :key="index"
-        class="border w-10 h-10 grid place-items-center ml-4 text-2xl"
-      >
-        {{ variant }}
-      </span>
-    </div>
+        <span
+          v-for="(variant, index) in variantes"
+          :key="index"
+          class="border w-10 h-10 grid place-items-center ml-4 text-2xl"
+        >
+          {{ variant }}
+        </span>
+      </div>
 
-    <div class="flex mt-8">
-      <h6 class="text-primary mr-4 whitespace-nowrap">Categories :</h6>
+      <div class="flex mt-8">
+        <h6 class="text-primary mr-4 whitespace-nowrap">Categories :</h6>
 
-      <div class="flex">
-        <div class="ml-3" >
-          <!-- v-for="(category, index) in categories" :key="index" -->
-          <span class="text-[#211F16] opacity-[0.5] underline capitalize">
-            {{ categorie }}
+        <div class="flex">
+          <div class="ml-3">
+            <!-- v-for="(category, index) in categories" :key="index" -->
+            <span class="text-[#211F16] opacity-[0.5] underline capitalize">
+              {{ categorie }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
+
+      <div>
+        <h6 class="text-black font-semibold mb-5">Télécharger</h6>
+
+        <div class="flex">
+          <span
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              mr-2
+              cursor-pointer
+            "
+          >
+            SVG
+          </span>
+
+          <span
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              mr-2
+              cursor-pointer
+            "
+          >
+            PNG
+          </span>
+
+          <span
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              cursor-pointer
+            "
+          >
+            EPS
           </span>
         </div>
       </div>
-    </div>
 
-    <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
-
-    <div>
-      <h6 class="text-black font-semibold mb-5">Télécharger</h6>
-
-      <div class="flex">
-        <span
-          class="
-            inline-block
-            px-4
-            py-2
-            border-primary border-2
-            text-primary
-            font-medium
-            mr-2
-            cursor-pointer
-          "
-        >
-          SVG
-        </span>
-
-        <span
-          class="
-            inline-block
-            px-4
-            py-2
-            border-primary border-2
-            text-primary
-            font-medium
-            mr-2
-            cursor-pointer
-          "
-        >
-          PNG
-        </span>
-
-        <span
-          class="
-            inline-block
-            px-4
-            py-2
-            border-primary border-2
-            text-primary
-            font-medium
-            cursor-pointer
-          "
-        >
-          EPS
-        </span>
-      </div>
-    </div>
-
-    <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
-    <div>
-      <pre>
+      <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
+      <div>
+        <pre>
         <code :key="currentSvg" v-highlight class="html p-5 whitespace-pre-wrap max-h-[300px]" id="content">{{ (currentSvg) }}
         </code>
       </pre>
+      </div>
+    </div>
+
+    <div v-else class="flex flex-col items-center mt-36 justify-center">
+      <span>
+        <svg
+          width="20"
+          height="78"
+          viewBox="0 0 20 78"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.25 0V52H19.75V0H0.25ZM6.75 6.5H13.25V45.5H6.75V6.5ZM0.25 58.5V78H19.75V58.5H0.25ZM6.75 65H13.25V71.5H6.75V65Z"
+            fill="#A6A296"
+          />
+        </svg>
+      </span>
+
+      <span class="text-center inline-block text-xl mt-9 text-[#A6A296]">
+        Select a logo to download
+      </span>
     </div>
   </section>
 </template>

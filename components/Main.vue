@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
 .content {
-  width: calc(100% - 440px);
+  width: calc(100% - 535px);
 
     display: grid;
     grid-template-columns: repeat(auto-fill,200px);
