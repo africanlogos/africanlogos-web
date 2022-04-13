@@ -5,8 +5,8 @@
 
     <section class="flex">
       <LeftBar :categories="categories" />
-      <Main :results="results" />
-      <RightBar />
+      <Main @get-svg="getSvg" :results="results" />
+      <RightBar :currentSvg="currentSvg" :categorie="selectedCategory" :logo="selectedLogo" />
     </section>
   </section>
 </template>
@@ -17,6 +17,9 @@ export default {
     return {
       results: [],
       categories: [],
+      selectedCategory: '',
+      selectedLogo: '',
+      currentSvg: '',
     };
   },
   async mounted() {
@@ -52,5 +55,22 @@ export default {
 
     this.results = finalResult;
   },
+  methods: {
+    getSvg(result) {
+      console.log(result);
+      this.selectedCategory = result.categorie;
+      this.selectedLogo = result.logo;
+
+
+      fetch(require(`@/assets/icons/${result.categorie}/${result.logo}`))
+        .then((response) => response.text())
+        .then((text) => {
+          this.currentSvg = text;
+          console.log(text);
+          // this.$emit("get-svg", text);
+        });
+      // this.$emit("get-svg", result);
+    },
+  }
 };
 </script>

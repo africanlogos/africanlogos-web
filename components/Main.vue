@@ -5,7 +5,7 @@
   <!-- gap-[34px] -->
 
     <div
-      v-for="(result, index) in results"
+      v-for="(result, index) in results" @click="getSvg(result)"
       :key="index"
       class="
         bg-secondary
@@ -16,6 +16,7 @@
         justify-center
       "
     >
+
       <img
         :src="require(`@/assets/icons/${result.categorie}/${result.logo}`)"
         class="w-[140px] h-[110px] mb-8"
@@ -41,6 +42,12 @@ export default {
   async mounted() {
 
   },
+  methods: {
+    getSvg(result) {
+      this.$emit('get-svg', result);
+      // console.log(result);
+    }
+  }
 };
 </script>
 
