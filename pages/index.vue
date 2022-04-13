@@ -80,6 +80,17 @@ export default {
     },
     filterBycategories(categorie) {
          this.filterCategory = categorie.name;
+
+
+
+
+
+
+
+               this.selectedCategory = ''
+      this.selectedLogo = ''
+      this.currentSvg = ''
+      this.selectedName = ''
     },
   }
 };
