@@ -1,0 +1,22 @@
+name: deploy-app
+
+
+on: 
+ push:
+   branches:
+         - main
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls
+      - run: npm install --legacy-peer-deps
+      - run: npm run generate
+      - uses: actions/setup-node@v1
+        with: 
+           node-version: 8
+      - run: npm install -g surge
+      - run:  surge ./dist africanlogos.surge.sh --token ${{secrets.TOKEN}}
