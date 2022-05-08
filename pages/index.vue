@@ -34,7 +34,7 @@ export default {
     };
   },
   async mounted() {
-    const response = await fetch("http://localhost:3000/api/categories");
+    const response = await fetch(`${process.env.baseUrl}/api/categories`);
 
     const data = await response.json();
 

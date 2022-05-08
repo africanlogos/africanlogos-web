@@ -44,7 +44,18 @@ export default {
   build: {
   },
 
+  env: {
+    baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://africanlogos.surge.sh/'
+  },
+
   serverMiddleware: [
     { path: '/api', handler: '~/api/index.js' }
-  ]
+  ],
+
+  publicRuntimeConfig: {
+    myPublicVariable: process.env.PUBLIC_VARIABLE,
+  },
+  privateRuntimeConfig: {
+    myPrivateToken: process.env.PRIVATE_TOKEN
+  }
 }

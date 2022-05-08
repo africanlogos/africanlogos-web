@@ -9,8 +9,6 @@ const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     .map((item) => item.name);
 
 
-
-
     for (const categorie of categories) {
          const dir = pathToDirectory + '/' + categorie;
          try {
@@ -26,5 +24,5 @@ const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     module.exports = { path: '/api', handler: app }
 
     app.get('/categories', (req, res) => {
-    res.json({ datas: categories,results })
+     res.json({ datas: categories,results })
     })
