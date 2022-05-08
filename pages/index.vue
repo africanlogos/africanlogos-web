@@ -72,6 +72,15 @@ export default {
     },
   },
   methods: {
+    downloadURI(uri, name) {
+      var link = document.createElement("a");
+      link.download = name;
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      // delete link;
+    },
     getSvg(result) {
       console.log(result);
       this.selectedCategory = result.categorie;
@@ -83,6 +92,22 @@ export default {
         .then((text) => {
           this.currentSvg = text;
         });
+
+
+
+
+        // fetch(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`))
+        // .then( res => res.blob() )
+        // .then( blob => {
+        //   var file = window.URL.createObjectURL(blob);
+        //   window.location.assign(file);
+        // });
+
+        // this.downloadURI(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`), result.name);
+
+
+
+
     },
     filterBycategories(categorie) {
       this.filterCategory = categorie.name;

@@ -46,7 +46,7 @@
         <h6 class="text-black font-semibold mb-5">Télécharger</h6>
 
         <div class="flex">
-          <span
+          <span @click="downloadSvg"
             class="
               inline-block
               px-4
@@ -161,7 +161,16 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    downloadSvg(){
+      var link = document.createElement("a");
+      link.download = this.name;
+      link.href = require(`@/assets/icons/${this.categorie}/${this.logo}/${this.logo}.svg`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  },
 };
 </script>
 
