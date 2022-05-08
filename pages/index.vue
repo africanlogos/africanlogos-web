@@ -78,7 +78,7 @@ export default {
       this.selectedLogo = result.logo;
       this.selectedName = result.name;
 
-      fetch(require(`@/assets/icons/${result.categorie}/${result.logo}`))
+      fetch(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`))
         .then((response) => response.text())
         .then((text) => {
           this.currentSvg = text;
@@ -86,7 +86,6 @@ export default {
     },
     filterBycategories(categorie) {
       this.filterCategory = categorie.name;
-
       this.selectedCategory = "";
       this.selectedLogo = "";
       this.currentSvg = "";

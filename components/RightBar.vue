@@ -8,11 +8,11 @@
       <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
 
       <div v-if="categorie" class="bg-white grid place-items-center mb-6">
-        <img
+        <!-- <img
           :src="require(`@/assets/icons/${categorie}/${logo}`)"
           alt=""
           srcset=""
-        />
+        /> -->
       </div>
 
       <div class="flex items-center">
