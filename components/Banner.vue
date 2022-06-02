@@ -3,7 +3,7 @@
     :class="index === 0 ? 'banner-first-slide-bg' : 'banner-second-slide-bg'"
     class="bg-[#C5A811] banner h-60 p-4 justify-between"
   >
-    <span class="close absolute right-[50px] top-[40px] cursor-pointer z-30">
+    <span class="close absolute right-[50px] top-[40px] cursor-pointer z-30" @click="toggleBanner">
       <svg
         width="18"
         height="18"
@@ -185,6 +185,13 @@ export default {
       this.index = this.index === 0 ? 1 : 0;
     }, 3000);
   },
+
+
+  methods: {
+    toggleBanner(){
+       this.$store.commit('toggleBanner')
+    }
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-secondary w-[272px]">
+  <section class="bg-secondary w-[272px] flex-shrink-0">
     <div>
       <span
         @click="activeSection = 0"
@@ -69,9 +69,20 @@
       <div class="overflow-scroll h-screen">
         <div
           :class="
+            activeCategories === -1 ? 'active text-white' : 'text-primary'
+          "
+          @click="getCategories({name:''}, -1)"
+          class="flex justify-between px-5 py-[10px] cursor-pointer"
+        >
+          <span class=""> All </span>
+          <span class=""> {{ total}} </span>
+        </div>
+
+        <div
+          :class="
             activeCategories === index ? 'active text-white' : 'text-primary'
           "
-          @click="getCategories(cat,index)"
+          @click="getCategories(cat, index)"
           class="flex justify-between px-5 py-[10px] cursor-pointer"
           v-for="(cat, index) in categories"
           :key="index"
@@ -88,12 +99,12 @@
 
 <script>
 export default {
- props: {
-     categories: {
-         type: Array,
-         default: []
-     }
- },
+  props: {
+    categories: {
+      type: Array,
+      default: [],
+    },
+  },
   data() {
     return {
       activeCategories: -1,
@@ -101,15 +112,20 @@ export default {
     };
   },
 
-
   methods: {
-    getCategories(categorie,index) {
-      this.activeCategories = index
+    getCategories(categorie, index) {
+      this.activeCategories = index;
       console.log(categorie);
-      this.$emit('filter-by-category', categorie)
-            // this.$store.dispatch('getCategories');
+      this.$emit("filter-by-category", categorie);
+      // this.$store.dispatch('getCategories');
     },
   },
+
+  computed:{
+    total(){
+      return this.categories.reduce((a,b)=>a + b.count,0)
+    }
+  }
 };
 </script>
 

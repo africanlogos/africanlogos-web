@@ -1,15 +1,17 @@
 <template>
   <section>
-    <Banner />
+    <Banner v-if="bannerIsOpen" />
     <Header />
 
     <section class="flex">
       <LeftBar
+        v-if="leftBarIsOpen"
         @filter-by-category="filterBycategories"
         :categories="categories"
       />
       <Main @get-svg="getSvg" :results="filteredResults" />
       <RightBar
+        v-if="rightBarIsOpen"
         :currentSvg="currentSvg"
         :name="selectedName"
         :categorie="selectedCategory"
@@ -65,10 +67,26 @@ export default {
   computed: {
     filteredResults() {
       return this.results.filter((result) => {
-        return result.categorie
+        const filterByCategorie = result.categorie
           .toLowerCase()
           .includes(this.filterCategory.toLowerCase());
+        const filterBySearch = result.name
+          .toLowerCase()
+          .includes(this.searchValue.toLowerCase());
+        return filterByCategorie && filterBySearch;
       });
+    },
+    leftBarIsOpen() {
+      return this.$store.state.leftBarIsOpen;
+    },
+    rightBarIsOpen() {
+      return this.$store.state.rightBarIsOpen;
+    },
+    bannerIsOpen() {
+      return this.$store.state.bannerIsOpen;
+    },
+    searchValue() {
+      return this.$store.state.searchValue;
     },
   },
   methods: {
@@ -87,27 +105,13 @@ export default {
       this.selectedLogo = result.logo;
       this.selectedName = result.name;
 
-      fetch(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`))
+      fetch(
+        require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`)
+      )
         .then((response) => response.text())
         .then((text) => {
           this.currentSvg = text;
         });
-
-
-
-
-        // fetch(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`))
-        // .then( res => res.blob() )
-        // .then( blob => {
-        //   var file = window.URL.createObjectURL(blob);
-        //   window.location.assign(file);
-        // });
-
-        // this.downloadURI(require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`), result.name);
-
-
-
-
     },
     filterBycategories(categorie) {
       this.filterCategory = categorie.name;
@@ -115,6 +119,11 @@ export default {
       this.selectedLogo = "";
       this.currentSvg = "";
       this.selectedName = "";
+    },
+  },
+  watch: {
+    setSearchValue(value) {
+      console.log(value);
     },
   },
 };

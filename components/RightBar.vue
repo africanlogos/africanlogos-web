@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-secondary w-[272px] p-6">
+  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0">
     <div v-if="categorie">
       <h4 class="text-[16px] text-center mt-[22px]">
         <span class="capitalize">{{ name }} </span> ∙ NG ∙ Bank
@@ -46,7 +46,8 @@
         <h6 class="text-black font-semibold mb-5">Télécharger</h6>
 
         <div class="flex">
-          <span @click="downloadSvg"
+          <span
+            @click="downloadSvg"
             class="
               inline-block
               px-4
@@ -162,14 +163,14 @@ export default {
   },
 
   methods: {
-    downloadSvg(){
+    downloadSvg() {
       var link = document.createElement("a");
       link.download = this.name;
       link.href = require(`@/assets/icons/${this.categorie}/${this.logo}/${this.logo}.svg`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }
+    },
   },
 };
 </script>

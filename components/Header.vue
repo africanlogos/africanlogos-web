@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[100px] flex  border-[#e4e4e4] border-x-0 border-b-2">
+  <section class="h-[100px] flex border-[#e4e4e4] border-x-0 border-b-2">
     <div class="bg-secondary flex items-center w-[272px] justify-center">
       <span>
         <svg
@@ -35,7 +35,7 @@
 
       <span class="inline-block ml-3 mr-10"> African Logos </span>
 
-      <span class="cursor-pointer">
+      <span class="cursor-pointer" @click="toggleLeftBar">
         <svg
           width="28"
           height="28"
@@ -65,6 +65,8 @@
 
       <div class="flex items-center">
         <span
+          @click="toggleLeftBar"
+          :class="leftBarIsOpen ? 'active' : ''"
           class="
             left_shell
             shell
@@ -79,6 +81,8 @@
         >
         </span>
         <span
+          @click="toogleRightBar"
+          :class="rightBarIsOpen ? 'active' : ''"
           class="
             right_shell
             shell
@@ -113,14 +117,12 @@
       </div>
     </div>
 
-        <div class="bg-secondary flex items-center w-[272px] justify-center ml-auto">
- 
-
-           <a href="" class=" bg-primary text-white px-6 py-4 cursor-pointer">
-               Contribuer
-           </a>
-
-   
+    <div
+      class="bg-secondary flex items-center w-[272px] justify-center ml-auto"
+    >
+      <a href="" class="bg-primary text-white px-6 py-4 cursor-pointer">
+        Contribuer
+      </a>
     </div>
   </section>
 </template>
@@ -139,6 +141,22 @@ export default {
     TwitterIcon,
     GithubIcon,
     ArobaseIcon,
+  },
+  methods: {
+    toggleLeftBar() {
+      this.$store.commit("toggleLeftBar");
+    },
+    toogleRightBar() {
+      this.$store.commit("toggleRightBar");
+    },
+  },
+  computed: {
+    leftBarIsOpen() {
+      return this.$store.state.leftBarIsOpen;
+    },
+    rightBarIsOpen() {
+      return this.$store.state.rightBarIsOpen;
+    },
   },
 };
 </script>
@@ -159,12 +177,27 @@ export default {
   margin-top: 2px;
   margin-left: 3px;
   transition: all 0.6s;
-  /* margin-left: 12px; */
 }
 
-.left_shell {
+.right_shell::after {
+  transform: translateX(8px);
 }
 
-.right_shell {
+.right_shell.active {
+  background: #3d6f35;
+}
+
+.right_shell.active::after {
+  /* background: #3D6F35; */
+  transform: translateX(0px);
+}
+
+.left_shell.active {
+  background: #3d6f35;
+}
+
+.left_shell.active::after {
+  /* background: #3D6F35; */
+  transform: translateX(8px);
 }
 </style>

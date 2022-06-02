@@ -17,7 +17,7 @@
       </svg>
     </span>
 
-    <input
+    <input v-model="searchValue"
       type="text"
       placeholder="Chercher une entreprise"
       class="placeholder:text-[#A6A296] h-full focus:outline-none"
@@ -26,7 +26,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return {
+      searchValue: ''
+    }
+  },
+  watch: {
+    searchValue(value){
+      this.$store.commit('setSearchValue', value)
+    }
+  }
+};
 </script>
 
 <style>
