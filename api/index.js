@@ -8,7 +8,7 @@ const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
     .filter((item) => item.isDirectory())
     .map((item) => item.name);
 
-
+ 
     for (const categorie of categories) {
          const dir = pathToDirectory + '/' + categorie;
          try {
