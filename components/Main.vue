@@ -16,7 +16,7 @@
     >
       <img
         :src="
-          require(`@/assets/icons/${result.categorie}/${result.name}/${result.logo}.svg`)
+          require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}.svg`)
         "
         class="w-[140px] h-[110px] mb-8"
       />

@@ -68,11 +68,11 @@
             v-if="dropdownCountryIsOpen"
           >
             <div
-              v-for="({ url, name }, index) in countryItems"
+              v-for="({ url, name,code }, index) in countryItems"
               :key="index"
               :class="{ 'mt-5': index !== 0 }"
               class="flex items-center cursor-pointer"
-              @click="setCountry(name)"
+              @click="setCountry(name,code)"
             >
               <span>
                 <img class="w-5 h-[15px]" :src="url" alt="" />
@@ -214,30 +214,37 @@ export default {
         {
           name: "Benin",
           url: "https://countryflagsapi.com/png/bj",
+          code: "bj",
         },
         {
           name: "Ivory Coast",
           url: "https://countryflagsapi.com/png/ci",
+          code: "ci",
         },
         {
           name: "Ghana",
           url: "https://countryflagsapi.com/png/gh",
+          code: "gh",
         },
         {
           name: "South Africa",
           url: "https://countryflagsapi.com/png/za",
+          code: "za",
         },
         {
           name: "Nigeria",
           url: "https://countryflagsapi.com/png/ng",
+          code: "ng",
         },
         {
           name: "Algeria",
           url: "https://countryflagsapi.com/png/dz",
+          code: "dz",
         },
         {
           name: "Togo",
           url: "https://countryflagsapi.com/png/tg",
+          code: 'tg'
         },
       ],
     };
