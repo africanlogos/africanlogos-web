@@ -1,7 +1,7 @@
 <template>
   <section>
     <Banner v-if="bannerIsOpen" />
-    <Header />
+    <Header @filter-by-countryes="filterByCountryes" />
 
     <section class="flex">
       <LeftBar
@@ -31,7 +31,7 @@ export default {
       selectedLogo: "",
       currentSvg: "",
       selectedName: "",
-
+      countryCode: "",
       filterCategory: "",
     };
   },
@@ -67,13 +67,24 @@ export default {
   computed: {
     filteredResults() {
       return this.results.filter((result) => {
+        
         const filterByCategorie = result.categorie
           .toLowerCase()
           .includes(this.filterCategory.toLowerCase());
+
+        
+        const filterByCountryes = result.name
+          .toLowerCase()
+          .includes(this.countryCode.toLowerCase());
+
+
         const filterBySearch = result.name
           .toLowerCase()
           .includes(this.searchValue.toLowerCase());
-        return filterByCategorie && filterBySearch;
+
+      
+
+        return (filterByCategorie || filterByCountryes) && filterBySearch;
       });
     },
     leftBarIsOpen() {
@@ -115,6 +126,14 @@ export default {
     },
     filterBycategories(categorie) {
       this.filterCategory = categorie.name;
+      this.selectedCategory = "";
+      this.selectedLogo = "";
+      this.currentSvg = "";
+      this.selectedName = "";
+    },
+    filterByCountryes(countryCode) {
+      this.filterCountry = countryCode;
+      this.filterCategory = "";
       this.selectedCategory = "";
       this.selectedLogo = "";
       this.currentSvg = "";
