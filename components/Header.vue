@@ -65,7 +65,7 @@
 
           <div
             class="bg-white shadow-2xl absolute p-3 w-[152px]"
-            v-if="dropdownCountryIsOpen"
+            v-show="dropdownCountryIsOpen"
           >
             <div
               v-for="({ url, name,code }, index) in countryItems"
