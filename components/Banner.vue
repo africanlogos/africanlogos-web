@@ -115,8 +115,6 @@
           "
           :class="index === 0 ? '' : 'active-banner'"
         >
-          <!-- <p class="text-white countries-title">Contributeurs</p> -->
-
           <span
             :style="`left:${index * -32}px`"
             v-for="(avatar, index) in avatarList"
@@ -128,8 +126,6 @@
               class="w-10 h-10 rounded-full border border-[#C4C4C4]"
             />
           </span>
-
-          <!-- <span class="text-white font-bold rest-countries"> + 2 </span> -->
         </div>
       </div>
     </div>
@@ -157,7 +153,7 @@ export default {
   },
   data() {
     return {
-      index: 0,
+      index: 1,
       flagsList: [
         "benin-flags",
         "ivory-coast-flags",
@@ -182,7 +178,7 @@ export default {
 
   mounted() {
     setInterval(() => {
-      this.index = this.index === 0 ? 1 : 0;
+      // this.index = this.index === 0 ? 1 : 0;
     }, 3000);
   },
 

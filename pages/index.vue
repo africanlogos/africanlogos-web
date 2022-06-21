@@ -1,8 +1,8 @@
 <template>
   <section>
     <Banner v-if="bannerIsOpen" />
-    <Header />
-
+    <Header @filter-by-countryes="filterByCountryes" />
+    {{ filterCountry }}
     <section class="flex">
       <LeftBar
         v-if="leftBarIsOpen"
@@ -27,11 +27,12 @@ export default {
     return {
       results: [],
       categories: [],
+      filterCountry: "",
       selectedCategory: "",
       selectedLogo: "",
       currentSvg: "",
       selectedName: "",
-
+      countryCode: "",
       filterCategory: "",
     };
   },
@@ -40,29 +41,26 @@ export default {
 
     const data = await response.json();
 
-    let results = data.results;
+    let results = data.datas;
 
-    let finalResult = [];
+    let categorie = {};
 
-    for (const key in results) {
-      if (Object.hasOwnProperty.call(results, key)) {
-        const logos = results[key];
-        this.categories.push({
-          name: key,
-          count: logos.length,
-        });
-        logos.forEach((logo) => {
-          finalResult.push({
-            categorie: key,
-            logo,
-            name: logo.split(".")[0],
-          });
-        });
+    results.forEach((element) => {
+      if (categorie[element.categorie]) {
+        categorie[element.categorie]++;
+      } else {
+        categorie[element.categorie] = 1;
       }
-    }
+    });
 
-    this.results = finalResult;
-    console.log(this.results);
+    this.categories = Object.keys(categorie).map((key) => {
+      return {
+        name: key,
+        count: categorie[key],
+      };
+    });
+
+    this.results = results;
   },
   computed: {
     filteredResults() {
@@ -70,10 +68,16 @@ export default {
         const filterByCategorie = result.categorie
           .toLowerCase()
           .includes(this.filterCategory.toLowerCase());
-        const filterBySearch = result.name
+
+        const filterByCountryes = result.country
+          .toLowerCase()
+          .includes(this.countryCode.toLowerCase());
+
+        const filterBySearch = result.icon
           .toLowerCase()
           .includes(this.searchValue.toLowerCase());
-        return filterByCategorie && filterBySearch;
+
+        return (filterByCountryes && filterByCategorie ) && filterBySearch;
       });
     },
     leftBarIsOpen() {
@@ -114,8 +118,17 @@ export default {
         });
     },
     filterBycategories(categorie) {
+      console.log(categorie);
       this.filterCategory = categorie.name;
       this.selectedCategory = "";
+      this.selectedLogo = "";
+      this.currentSvg = "";
+      this.selectedName = "";
+    },
+    filterByCountryes(countryCode) {
+      console.log(countryCode);
+      this.countryCode = countryCode;
+      this.filterCategory = "";
       this.selectedLogo = "";
       this.currentSvg = "";
       this.selectedName = "";
