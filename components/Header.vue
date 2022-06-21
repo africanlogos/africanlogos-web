@@ -51,69 +51,97 @@
       </span>
     </div>
 
-    <Search />
+    <div class=" flex justify-between w-full flex-1 pr-10 ">
+      <Search />
 
-    <div class="flex items-center ml-[50px]">
-      <span>
-        <globe-icon />
-      </span>
+      <div class="flex items-center ml-[50px]">
+        <div class="relative">
+          <span
+            class="cursor-pointer flex items-center"
+            @click="dropdownCountryIsOpen = !dropdownCountryIsOpen"
+          >
+              <globe-icon class=" mr-1"  /> {{ currentCountry }}
+          </span>
 
-      <span
-        class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-5 mr-8"
-      >
-      </span>
+          <div
+            class="bg-white shadow-2xl absolute p-3 w-[152px]"
+            v-show="dropdownCountryIsOpen"
+          >
+            <div
+              v-for="({ url, name,code }, index) in countryItems"
+              :key="index"
+              :class="{ 'mt-5': index !== 0 }"
+              class="flex items-center cursor-pointer"
+              @click="setCountry(name,code)"
+            >
+              <span>
+                <img class="w-5 h-[15px]" :src="url" alt="" />
+              </span>
 
-      <div class="flex items-center">
+              <span class="inline-block ml-2">
+                {{ name }}
+              </span>
+            </div>
+          </div>
+        </div>
+
         <span
-          @click="toggleLeftBar"
-          :class="leftBarIsOpen ? 'active' : ''"
-          class="
-            left_shell
-            shell
-            w-6
-            h-[22px]
-            inline-block
-            bg-[#C4C4C4]
-            relative
-            mr-6
-            cursor-pointer
-          "
+          class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-5 mr-8"
         >
         </span>
+
+        <div class="flex items-center">
+          <span
+            @click="toggleLeftBar"
+            :class="leftBarIsOpen ? 'active' : ''"
+            class="
+              left_shell
+              shell
+              w-6
+              h-[22px]
+              inline-block
+              bg-[#C4C4C4]
+              relative
+              mr-6
+              cursor-pointer
+            "
+          >
+          </span>
+          <span
+            @click="toogleRightBar"
+            :class="rightBarIsOpen ? 'active' : ''"
+            class="
+              right_shell
+              shell
+              w-6
+              h-[22px]
+              inline-block
+              bg-[#C4C4C4]
+              relative
+              cursor-pointer
+            "
+          >
+          </span>
+        </div>
+
         <span
-          @click="toogleRightBar"
-          :class="rightBarIsOpen ? 'active' : ''"
-          class="
-            right_shell
-            shell
-            w-6
-            h-[22px]
-            inline-block
-            bg-[#C4C4C4]
-            relative
-            cursor-pointer
-          "
+          class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-8 mr-9"
         >
         </span>
-      </div>
 
-      <span
-        class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-8 mr-9"
-      >
-      </span>
+        <div class="social_media">
+          <span class="inline-block w-7 h-7">
+            <twitter-icon />
+          </span>
 
-      <div class="social_media">
-        <span class="inline-block w-7 h-7">
-          <twitter-icon />
-        </span>
+          <span class="inline-block w-7 h-7 mx-5">
+            <github-icon />
+          </span>
 
-        <span class="inline-block w-7 h-7 mx-5">
-          <github-icon />
-        </span>
-
-        <span class="inline-block w-7 h-7">
-          <arobase-icon />
-        </span>
+          <span class="inline-block w-7 h-7">
+            <arobase-icon />
+          </span>
+        </div>
       </div>
     </div>
 
@@ -133,6 +161,13 @@ import GlobeIcon from "./icons/GlobeIcon.vue";
 import TwitterIcon from "./icons/TwitterIcon.vue";
 import GithubIcon from "./icons/GithubIcon.vue";
 import ArobaseIcon from "./icons/ArobaseIcon.vue";
+import BeninFlags from "./countriesFlags/BeninFlags.vue";
+import IvoryCoastFlags from "./countriesFlags/IvoryCoastFlags.vue";
+import GhanaFlags from "./countriesFlags/GhanaFlags.vue";
+import SouthAfricaFlags from "./countriesFlags/SouthAfricaFlags.vue";
+import NigeriaFlags from "./countriesFlags/NigeriaFlags.vue";
+import AlgeriaFlags from "./countriesFlags/AlgeriaFlags.vue";
+import TogoFlags from "./countriesFlags/TogoFlags.vue";
 export default {
   name: "Header",
   components: {
@@ -141,6 +176,14 @@ export default {
     TwitterIcon,
     GithubIcon,
     ArobaseIcon,
+
+    BeninFlags,
+    IvoryCoastFlags,
+    GhanaFlags,
+    SouthAfricaFlags,
+    NigeriaFlags,
+    AlgeriaFlags,
+    TogoFlags,
   },
   methods: {
     toggleLeftBar() {
@@ -148,6 +191,11 @@ export default {
     },
     toogleRightBar() {
       this.$store.commit("toggleRightBar");
+    },
+    setCountry(name,code) {
+      this.currentCountry = name;
+      this.dropdownCountryIsOpen = false;
+      this.$emit("filter-by-countryes", code);
     },
   },
   computed: {
@@ -157,6 +205,49 @@ export default {
     rightBarIsOpen() {
       return this.$store.state.rightBarIsOpen;
     },
+  },
+  data() {
+    return {
+      currentCountry: '',
+      dropdownCountryIsOpen: false,
+      countryItems: [
+        {
+          name: "Benin",
+          url: "https://countryflagsapi.com/png/bj",
+          code: "bj",
+        },
+        {
+          name: "Ivory Coast",
+          url: "https://countryflagsapi.com/png/ci",
+          code: "ci",
+        },
+        {
+          name: "Ghana",
+          url: "https://countryflagsapi.com/png/gh",
+          code: "gh",
+        },
+        {
+          name: "South Africa",
+          url: "https://countryflagsapi.com/png/za",
+          code: "za",
+        },
+        {
+          name: "Nigeria",
+          url: "https://countryflagsapi.com/png/ng",
+          code: "ng",
+        },
+        {
+          name: "Algeria",
+          url: "https://countryflagsapi.com/png/dz",
+          code: "dz",
+        },
+        {
+          name: "Togo",
+          url: "https://countryflagsapi.com/png/tg",
+          code: 'tg'
+        },
+      ],
+    };
   },
 };
 </script>

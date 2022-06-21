@@ -1,28 +1,48 @@
-const fs = require('fs');
+const fs = require("fs");
 
-const pathToDirectory = './assets/icons';
+const pathToDirectory = "./assets/icons";
 
-let results = {}
+let results = [];
 
-const categories = fs.readdirSync(pathToDirectory, { withFileTypes: true })
+// country,icon,categorie
+
+function readFolderInFolder(path) {
+  return fs
+    .readdirSync(path, { withFileTypes: true })
     .filter((item) => item.isDirectory())
     .map((item) => item.name);
+}
 
- 
-    for (const categorie of categories) {
-         const dir = pathToDirectory + '/' + categorie;
-         try {
-            const files = fs.readdirSync(dir);
-            results[categorie] = files
-        } catch (err) {
-            console.log(err);
-        }
-    }
+const countries = readFolderInFolder(pathToDirectory);
+for (const countrie of countries) {
+  const dir = pathToDirectory + "/" + countrie;
+  const categorie = readFolderInFolder(dir);
 
+  categorie.forEach((categorie) => {
+    const path = dir + "/" + categorie;
+    const iconFolders = readFolderInFolder(path);
 
-    const app = require('express')()
-    module.exports = { path: '/api', handler: app }
+    iconFolders.forEach((iconFolder) => {
+      const path = dir + "/" + categorie + "/" + iconFolder;
 
-    app.get('/categories', (req, res) => {
-     res.json({ datas: categories,results })
-    })
+      const files = fs.readdirSync(path);
+
+      console.log(countrie, categorie, iconFolder);
+
+      results.push({
+        country: countrie,
+        categorie: categorie,
+        icon: iconFolder,
+      });
+    });
+  });
+}
+
+const app = require("express")();
+module.exports = { path: "/api", handler: app };
+
+console.log(results);
+
+app.get("/categories", (req, res) => {
+  res.json({ datas: results });
+});
