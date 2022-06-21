@@ -178,7 +178,7 @@ export default {
 
   mounted() {
     setInterval(() => {
-      // this.index = this.index === 0 ? 1 : 0;
+      this.index = this.index === 0 ? 1 : 0;
     }, 3000);
   },
 
