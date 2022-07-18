@@ -16,6 +16,7 @@
         :name="selectedName"
         :categorie="selectedCategory"
         :logo="selectedLogo"
+        :country="selectedCountry"
       />
     </section>
   </section>
@@ -34,6 +35,7 @@ export default {
       selectedName: "",
       countryCode: "",
       filterCategory: "",
+      selectedCountry: "",
     };
   },
   async mounted() {
@@ -106,11 +108,14 @@ export default {
     getSvg(result) {
       console.log(result);
       this.selectedCategory = result.categorie;
-      this.selectedLogo = result.logo;
-      this.selectedName = result.name;
+      this.selectedLogo = result.icon;
+      this.selectedName = result.icon;
+      this.selectedCountry = result.country;
+
+
 
       fetch(
-        require(`@/assets/icons/${result.categorie}/${result.logo}/${result.logo}.svg`)
+        require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}.svg`)
       )
         .then((response) => response.text())
         .then((text) => {

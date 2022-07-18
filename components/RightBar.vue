@@ -1,14 +1,14 @@
 <template>
-  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0">
+  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0 h-screen">
     <div v-if="categorie">
       <h4 class="text-[16px] text-center mt-[22px]">
-        <span class="capitalize">{{ name }} </span> ∙ NG ∙ Bank
+        <span class="capitalize">{{ name }} </span> ∙ {{ country }} ∙
+        {{ categorie }}
       </h4>
 
       <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
 
-      <div v-if="categorie" class="bg-white grid place-items-center mb-6">
-      </div>
+      <div v-if="categorie" class="bg-white grid place-items-center mb-6"></div>
 
       <div class="flex items-center">
         <h6 class="text-primary mr-4 whitespace-nowrap">Variantes :</h6>
@@ -43,45 +43,19 @@
         <div class="flex">
           <span
             @click="downloadSvg"
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              mr-2
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium mr-2 cursor-pointer"
           >
             SVG
           </span>
 
           <span
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              mr-2
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium mr-2 cursor-pointer"
           >
             PNG
           </span>
 
           <span
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium cursor-pointer"
           >
             EPS
           </span>
@@ -125,6 +99,10 @@ export default {
   components: {},
   props: {
     categorie: {
+      type: String,
+      required: true,
+    },
+    country: {
       type: String,
       required: true,
     },
