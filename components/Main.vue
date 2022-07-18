@@ -1,18 +1,13 @@
 <template>
-  <section class="p-3 overflow-scroll content" v-if="results.length > 0">
+  <section
+    class="p-3 overflow-scroll content h-screen"
+    v-if="results.length > 0"
+  >
     <div
       v-for="(result, index) in results"
       @click="getSvg(result)"
       :key="index"
-      class="
-        bg-secondary
-        w-[200px]
-        h-[200px]
-        cursor-pointer
-        flex flex-col
-        items-center
-        justify-center
-      "
+      class="bg-secondary w-[200px] h-[200px] cursor-pointer flex flex-col items-center justify-center"
     >
       <img
         :src="

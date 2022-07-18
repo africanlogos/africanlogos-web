@@ -46,3 +46,8 @@ console.log(results);
 app.get("/categories", (req, res) => {
   res.json({ datas: results });
 });
+
+
+//country -> categorie -> icon -> file_folder -> (variant_1,variant_2,variant_3)
+//sur la duree le projet sera lourd
+// donc les gens auront des difficulte a cloner le projet

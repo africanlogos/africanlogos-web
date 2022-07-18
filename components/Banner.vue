@@ -3,7 +3,10 @@
     :class="index === 0 ? 'banner-first-slide-bg' : 'banner-second-slide-bg'"
     class="bg-[#C5A811] banner h-60 p-4 justify-between"
   >
-    <span class="close absolute right-[50px] top-[40px] cursor-pointer z-30" @click="toggleBanner">
+    <span
+      class="close absolute right-[50px] top-[40px] cursor-pointer z-30"
+      @click="toggleBanner"
+    >
       <svg
         width="18"
         height="18"
@@ -20,30 +23,14 @@
 
     <div class="relative h-[86px]">
       <h1
-        class="
-          transition-all
-          duration-[.6s]
-          text-4xl
-          font-normal
-          text-white
-          max-w-[752px]
-          absolute
-        "
+        class="transition-all duration-[.6s] text-4xl font-normal text-white max-w-[752px] absolute"
         :class="index === 0 ? ' opacity-100' : ' opacity-0'"
       >
         Retrouvez les logos de vos entreprises favorites de partouts en afrique
       </h1>
 
       <h1
-        class="
-          text-4xl
-          transition-all
-          duration-[.6s]
-          font-normal
-          text-white
-          max-w-[752px]
-          absolute
-        "
+        class="text-4xl transition-all duration-[.6s] font-normal text-white max-w-[752px] absolute"
         :class="index === 1 ? ' opacity-100' : ' opacity-0'"
       >
         Telecharger gratuitement les logos de vos entreprises dans les meilleurs
@@ -55,26 +42,14 @@
       <div class="relative">
         <p
           :class="index === 0 ? ' opacity-100' : ' opacity-0'"
-          class="
-            text-white
-            absolute
-            whitespace-nowrap
-            transition-all
-            duration-[.6s]
-          "
+          class="text-white absolute whitespace-nowrap transition-all duration-[.6s]"
         >
           De nouveaux logos chaques semaines ∙ 54 Pays ∙ 750 Logos + En cours
         </p>
 
         <p
           :class="index === 1 ? ' opacity-100' : ' opacity-0'"
-          class="
-            text-white
-            absolute
-            whitespace-nowrap
-            transition-all
-            duration-[.6s]
-          "
+          class="text-white absolute whitespace-nowrap transition-all duration-[.6s]"
         >
           Exporter vers le format de votre choix ∙ SVG ∙ PNG ∙ EPS
         </p>
@@ -103,16 +78,7 @@
         </div>
 
         <div
-          class="
-            flex
-            relative
-            z-20
-            contributors
-            opacity-0
-            transition-all
-            duration-[.8s]
-            translate-x-[50px]
-          "
+          class="flex relative z-20 contributors opacity-0 transition-all duration-[.8s] translate-x-[50px]"
           :class="index === 0 ? '' : 'active-banner'"
         >
           <span
@@ -131,7 +97,6 @@
     </div>
   </section>
 </template>
-
 
 <script>
 import BeninFlags from "./countriesFlags/BeninFlags.vue";
@@ -182,23 +147,16 @@ export default {
     }, 3000);
   },
 
-
   methods: {
-    toggleBanner(){
-       this.$store.commit('toggleBanner')
-    }
-  }
+    toggleBanner() {
+      this.$store.commit("toggleBanner");
+    },
+  },
 };
 </script>
 
-
 <style scoped>
-/* #336234 rgba(51, 98, 52, 0.05)
-#5C7531 rgba(92, 117, 49, 1)
-#AA951B rgba(170, 149, 27, 1) */
 .banner {
-  /* background: linear-gradient(to right, #336234, #aa951b),
-    url("../assets/images/banner.png"); */
   background-blend-mode: screen, normal;
   background-size: cover;
 }
@@ -228,6 +186,5 @@ export default {
 .contributors.active-banner {
   transform: translateX(0px);
   opacity: 1;
-  /* transition: all 5s; */
 }
 </style>

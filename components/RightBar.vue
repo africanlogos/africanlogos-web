@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0 h-screen">
+  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0">
     <div v-if="categorie">
       <h4 class="text-[16px] text-center mt-[22px]">
         <span class="capitalize">{{ name }} </span> ∙ {{ country }} ∙
@@ -139,7 +139,7 @@ export default {
     downloadSvg() {
       var link = document.createElement("a");
       link.download = this.name;
-      link.href = require(`@/assets/icons/${this.categorie}/${this.logo}/${this.logo}.svg`);
+      link.href = require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}.svg`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
