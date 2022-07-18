@@ -1,5 +1,5 @@
 <template>
-  <section class="flex items-center pl-[51px] w-[20%] ">
+  <section class="flex items-center pl-[51px] w-[20%]">
     <span class="inline-block mr-3">
       <svg
         width="24"
@@ -17,7 +17,8 @@
       </svg>
     </span>
 
-    <input v-model="searchValue"
+    <input
+      v-model="searchValue"
       type="text"
       placeholder="Chercher une entreprise"
       class="placeholder:text-[#A6A296] h-full focus:outline-none"
@@ -26,19 +27,19 @@
 </template>
 
 <script>
+
 export default {
-  data(){
+  data() {
     return {
-      searchValue: ''
-    }
+      searchValue: "",
+    };
   },
   watch: {
-    searchValue(value){
-      this.$store.commit('setSearchValue', value)
-    }
-  }
+    searchValue(value) {
+      this.$store.commit("setSearchValue", value);
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

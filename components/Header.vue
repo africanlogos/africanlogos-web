@@ -51,7 +51,7 @@
       </span>
     </div>
 
-    <div class=" flex justify-between w-full flex-1 pr-10 ">
+    <div class="flex justify-between w-full flex-1 pr-10">
       <Search />
 
       <div class="flex items-center ml-[50px]">
@@ -60,7 +60,8 @@
             class="cursor-pointer flex items-center"
             @click="dropdownCountryIsOpen = !dropdownCountryIsOpen"
           >
-              <globe-icon class=" mr-1"  /> {{ currentCountry }}
+            <globe-icon v-if="!currentCountryCode" class="mr-1" />
+            <CurrentCountry v-else :country="currentCountryCode" />
           </span>
 
           <div
@@ -68,13 +69,13 @@
             v-show="dropdownCountryIsOpen"
           >
             <div
-              v-for="({ url, name,code }, index) in countryItems"
+              v-for="({ url, name, code }, index) in countryItems"
               :key="index"
               :class="{ 'mt-5': index !== 0 }"
               class="flex items-center cursor-pointer"
-              @click="setCountry(name,code)"
+              @click="setCountry(name, code)"
             >
-              <span>
+              <span v-if="url">
                 <img class="w-5 h-[15px]" :src="url" alt="" />
               </span>
 
@@ -94,32 +95,13 @@
           <span
             @click="toggleLeftBar"
             :class="leftBarIsOpen ? 'active' : ''"
-            class="
-              left_shell
-              shell
-              w-6
-              h-[22px]
-              inline-block
-              bg-[#C4C4C4]
-              relative
-              mr-6
-              cursor-pointer
-            "
+            class="left_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative mr-6 cursor-pointer"
           >
           </span>
           <span
             @click="toogleRightBar"
             :class="rightBarIsOpen ? 'active' : ''"
-            class="
-              right_shell
-              shell
-              w-6
-              h-[22px]
-              inline-block
-              bg-[#C4C4C4]
-              relative
-              cursor-pointer
-            "
+            class="right_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative cursor-pointer"
           >
           </span>
         </div>
@@ -192,10 +174,11 @@ export default {
     toogleRightBar() {
       this.$store.commit("toggleRightBar");
     },
-    setCountry(name,code) {
+    setCountry(name, code) {
       this.currentCountry = name;
       this.dropdownCountryIsOpen = false;
       this.$emit("filter-by-countryes", code);
+      this.currentCountryCode = code;
     },
   },
   computed: {
@@ -208,7 +191,8 @@ export default {
   },
   data() {
     return {
-      currentCountry: '',
+      currentCountryCode: "",
+      currentCountry: "",
       dropdownCountryIsOpen: false,
       countryItems: [
         {
@@ -244,7 +228,11 @@ export default {
         {
           name: "Togo",
           url: "https://countryflagsapi.com/png/tg",
-          code: 'tg'
+          code: "tg",
+        },
+        {
+          name: "Tout les pays",
+          code: "",
         },
       ],
     };

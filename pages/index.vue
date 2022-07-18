@@ -1,8 +1,9 @@
 <template>
   <section>
     <Banner v-if="bannerIsOpen" />
+
     <Header @filter-by-countryes="filterByCountryes" />
-    {{ filterCountry }}
+    <!-- <CurrentCountry /> -->
     <section class="flex">
       <LeftBar
         v-if="leftBarIsOpen"
@@ -16,6 +17,7 @@
         :name="selectedName"
         :categorie="selectedCategory"
         :logo="selectedLogo"
+        :countryCode="countryCode"
         :country="selectedCountry"
       />
     </section>
@@ -79,7 +81,7 @@ export default {
           .toLowerCase()
           .includes(this.searchValue.toLowerCase());
 
-        return (filterByCountryes && filterByCategorie ) && filterBySearch;
+        return filterByCountryes && filterByCategorie && filterBySearch;
       });
     },
     leftBarIsOpen() {
@@ -111,8 +113,6 @@ export default {
       this.selectedLogo = result.icon;
       this.selectedName = result.icon;
       this.selectedCountry = result.country;
-
-
 
       fetch(
         require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}.svg`)
