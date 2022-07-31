@@ -22,10 +22,22 @@ for (const countrie of countries) {
     const path = dir + "/" + categorie;
     const iconFolders = readFolderInFolder(path);
 
+
     iconFolders.forEach((iconFolder) => {
       const path = dir + "/" + categorie + "/" + iconFolder;
 
       const files = fs.readdirSync(path);
+      console.log(files),'files';
+     const variants = []
+
+     files.forEach((file) => {
+        const variant = file.split("_")[1].split(".")[0];
+        if (!variants.includes(variant)) {
+            variants.push(variant);
+        }
+     })
+
+
 
       console.log(countrie, categorie, iconFolder);
 
@@ -33,6 +45,7 @@ for (const countrie of countries) {
         country: countrie,
         categorie: categorie,
         icon: iconFolder,
+        variants
       });
     });
   });

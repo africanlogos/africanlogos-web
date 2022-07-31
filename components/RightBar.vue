@@ -10,15 +10,25 @@
 
       <div v-if="categorie" class="bg-white grid place-items-center mb-6"></div>
 
+      <div class="bg-white flex justify-center items-center h-32 mb-6">
+        <img
+          :src="
+            require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}_${currentVariant}.svg`)
+          "
+          class=""
+        />
+      </div>
+
       <div class="flex items-center">
         <h6 class="text-primary mr-4 whitespace-nowrap">Variantes :</h6>
 
         <span
-          v-for="(variant, index) in variantes"
+          v-for="(variant, index) in variants"
           :key="index"
-          class="border w-10 h-10 grid place-items-center ml-4 text-2xl"
+          @click="setVariant(variant)"
+          class="border w-8 h-8 grid place-items-center ml-4 cursor-pointer"
         >
-          {{ variant }}
+          {{ index + 1 }}
         </span>
       </div>
 
@@ -27,7 +37,6 @@
 
         <div class="flex">
           <div class="ml-3">
-            <!-- v-for="(category, index) in categories" :key="index" -->
             <span class="text-[#211F16] opacity-[0.5] underline capitalize">
               {{ categorie }}
             </span>
@@ -42,20 +51,48 @@
 
         <div class="flex">
           <span
-            @click="downloadSvg"
-            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium mr-2 cursor-pointer"
+            @click="download('svg')"
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              mr-2
+              cursor-pointer
+            "
           >
             SVG
           </span>
 
           <span
-            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium mr-2 cursor-pointer"
+            @click="download('png')"
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              mr-2
+              cursor-pointer
+            "
           >
             PNG
           </span>
 
           <span
-            class="inline-block px-4 py-2 border-primary border-2 text-primary font-medium cursor-pointer"
+            @click="download('eps')"
+            class="
+              inline-block
+              px-4
+              py-2
+              border-primary border-2
+              text-primary
+              font-medium
+              cursor-pointer
+            "
           >
             EPS
           </span>
@@ -98,6 +135,10 @@
 export default {
   components: {},
   props: {
+    variants: {
+      type: Array,
+      default: () => [],
+    },
     categorie: {
       type: String,
       required: true,
@@ -121,7 +162,7 @@ export default {
   },
   data() {
     return {
-      variantes: [1, 2, 3],
+      currentVariant: "variant1",
       categories: [
         {
           name: "Banking",
@@ -131,18 +172,20 @@ export default {
         },
       ],
       code: "const noop = () => {}",
-      // currentSvg: `<svg width="704" height="200" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M55.7 12.9v174.2h4.98V12.9h-5.06.09Zm30.86 124.3c4.5 0 8.8-1.8 11.98-5a17.15 17.15 0 0 0 0-24.16 16.88 16.88 0 0 0-23.96 0 17.15 17.15 0 0 0 0 24.16c3.18 3.2 7.49 5 11.98 5Zm16.9-59.32a17.21 17.21 0 0 1-4.63 12.65 16.94 16.94 0 0 1-12.3 5.32 16.83 16.83 0 0 1-12.28-5.32 17.1 17.1 0 0 1-4.64-12.65c.23-4.37 2.11-8.49 5.26-11.5a16.87 16.87 0 0 1 23.33 0 17.15 17.15 0 0 1 5.26 11.5Zm-73.58 38.2c4.5 0 8.8-1.8 11.98-5a17.15 17.15 0 0 0 0-24.16 16.88 16.88 0 0 0-23.96 0 17.15 17.15 0 0 0 0 24.16c3.17 3.2 7.48 5 11.98 5Z" fill="#1DAFEC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M612.79 35.26v129.37h21.04V120.3c0-11.28 1.43-19.26 4.38-23.9 2.99-4.6 8.15-6.88 15.47-6.88 5.75 0 9.9 1.68 12.43 4.97 2.63 3.25 3.91 8.59 3.91 15.92v54.22h21.05v-56.17c0-12.8-2.63-22.14-7.83-27.99a32 32 0 0 0-24.68-10.07 36.04 36.04 0 0 0-24.77 10.21V32.66l-21 2.55v.05ZM142.3 164.63V35.26l21.05-2.55v50.87a39.05 39.05 0 0 1 59.21.65c8.15 9.2 12.25 20.61 12.25 34.26 0 14.16-4.15 25.81-12.34 35.05-8.15 9.14-18.47 13.74-30.9 13.74a39.06 39.06 0 0-12.64 10.43Z" fill="#20365C"/></svg>`,
     };
   },
 
   methods: {
-    downloadSvg() {
-      var link = document.createElement("a");
+    download(type) {
+      const link = document.createElement("a");
       link.download = this.name;
-      link.href = require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}.svg`);
+      link.href = require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}.${type}`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    },
+    setVariant(variant) {
+      this.currentVariant = variant;
     },
   },
 };

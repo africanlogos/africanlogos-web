@@ -7,11 +7,19 @@
       v-for="(result, index) in results"
       @click="getSvg(result)"
       :key="index"
-      class="bg-secondary w-[200px] h-[200px] cursor-pointer flex flex-col items-center justify-center"
+      class="
+        bg-secondary
+        w-[200px]
+        h-[200px]
+        cursor-pointer
+        flex flex-col
+        items-center
+        justify-center
+      "
     >
       <img
         :src="
-          require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}.svg`)
+          require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}_variant1.svg`)
         "
         class="w-[140px] h-[110px] mb-8"
       />

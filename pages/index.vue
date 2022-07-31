@@ -1,9 +1,7 @@
 <template>
   <section>
     <Banner v-if="bannerIsOpen" />
-
     <Header @filter-by-countryes="filterByCountryes" />
-    <!-- <CurrentCountry /> -->
     <section class="flex">
       <LeftBar
         v-if="leftBarIsOpen"
@@ -12,6 +10,7 @@
       />
       <Main @get-svg="getSvg" :results="filteredResults" />
       <RightBar
+        :key="variants"
         v-if="rightBarIsOpen"
         :currentSvg="currentSvg"
         :name="selectedName"
@@ -19,6 +18,7 @@
         :logo="selectedLogo"
         :countryCode="countryCode"
         :country="selectedCountry"
+        :variants="variants"
       />
     </section>
   </section>
@@ -28,6 +28,7 @@
 export default {
   data() {
     return {
+      variants: [],
       results: [],
       categories: [],
       filterCountry: "",
@@ -113,9 +114,10 @@ export default {
       this.selectedLogo = result.icon;
       this.selectedName = result.icon;
       this.selectedCountry = result.country;
+      this.variants = result.variants;
 
       fetch(
-        require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}.svg`)
+        require(`@/assets/icons/${result.country}/${result.categorie}/${result.icon}/${result.icon}_variant1.svg`)
       )
         .then((response) => response.text())
         .then((text) => {
