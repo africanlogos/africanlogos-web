@@ -31,9 +31,9 @@ for (const countrie of countries) {
      const variants = []
 
      files.forEach((file) => {
-        const variant = file.split("_")[1].split(".")[0];
-        if (!variants.includes(variant)) {
-            variants.push(variant);
+        let numberOfvariant = (file.split("variant")[1]).split(".")[0];
+        if (!variants.includes(numberOfvariant)) {
+            variants.push(`variant${numberOfvariant}`);
         }
      })
 
@@ -47,6 +47,10 @@ for (const countrie of countries) {
         icon: iconFolder,
         variants
       });
+      
+     
+
+
     });
   });
 }

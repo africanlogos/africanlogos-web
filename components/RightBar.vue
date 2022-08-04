@@ -20,9 +20,15 @@
       </div>
 
       <div class="flex items-center">
-        <h6 class="text-primary mr-4 whitespace-nowrap">Variantes :</h6>
+        <h6
+          v-show="variants.length > 1"
+          class="text-primary mr-4 whitespace-nowrap"
+        >
+          Variantes :
+        </h6>
 
         <span
+          v-show="variants.length > 1"
           v-for="(variant, index) in variants"
           :key="index"
           @click="setVariant(variant)"

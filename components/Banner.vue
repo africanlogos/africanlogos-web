@@ -66,9 +66,9 @@
           "
         >
           <span
-            :style="`left:${index * -32}px`"
-            v-for="(flag, index) in flagsList"
-            :key="flag"
+            :style="`left:${i * -32}px`"
+            v-for="(flag, i) in flagsList"
+            :key="i"
             class="absolute"
           >
             <component :is="flag" />

@@ -11,7 +11,7 @@
       <Main @get-svg="getSvg" :results="filteredResults" />
       <RightBar
         :key="variants"
-        v-if="rightBarIsOpen"
+        v-if="rightBarIsOpen && selectedName"
         :currentSvg="currentSvg"
         :name="selectedName"
         :categorie="selectedCategory"
