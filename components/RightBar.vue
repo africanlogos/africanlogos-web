@@ -185,7 +185,7 @@ export default {
     download(type) {
       const link = document.createElement("a");
       link.download = this.name;
-      link.href = require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}.${type}`);
+      link.href = require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}_variant1.${type}`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
