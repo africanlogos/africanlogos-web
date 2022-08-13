@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const bodyParser = require('body-parser')
 const pathToDirectory = "./assets/icons";
 
 let results = [];
@@ -56,15 +56,11 @@ for (const countrie of countries) {
 }
 
 const app = require("express")();
-module.exports = { path: "/api", handler: app };
+app.use(bodyParser.json())
 
-console.log(results);
 
-app.get("/categories", (req, res) => {
+app.all("/categories", (req, res) => {
   res.json({ datas: results });
 });
 
-
-//country -> categorie -> icon -> file_folder -> (variant_1,variant_2,variant_3)
-//sur la duree le projet sera lourd
-// donc les gens auront des difficulte a cloner le projet
+module.exports = app;

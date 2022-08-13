@@ -45,7 +45,7 @@ export default {
   },
 
   env: {
-    baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://africanlogos.surge.sh/'
+    baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://localhost:8000'
   },
 
   serverMiddleware: [
