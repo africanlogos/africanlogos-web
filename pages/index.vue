@@ -3,6 +3,7 @@
     <Banner v-if="bannerIsOpen" />
     <Header @filter-by-countryes="filterByCountryes" />
     <section class="flex">
+
       <LeftBar
         v-if="leftBarIsOpen"
         @filter-by-category="filterBycategories"
@@ -109,7 +110,15 @@ export default {
       // delete link;
     },
     getSvg(result) {
-      console.log(result);
+      if (!result) {
+        this.selectedCategory = "";
+        this.selectedLogo = "";
+        this.selectedName = "";
+        this.selectedCountry = "";
+        this.variants = "";
+
+        return;
+      }
       this.selectedCategory = result.categorie;
       this.selectedLogo = result.icon;
       this.selectedName = result.icon;
@@ -148,3 +157,11 @@ export default {
   },
 };
 </script>
+
+
+<style>
+body {
+  height: 100%;
+  /* overflow-y: hidden; */
+}
+</style>

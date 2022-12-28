@@ -4,7 +4,7 @@
       <span
         @click="activeSection = 0"
         :class="activeSection === 0 ? 'active text-white' : ' text-primary'"
-        class="flex justify-between px-5 py-[10px] cursor-pointer"
+        class="flex justify-between px-5 py-[5px] cursor-pointer"
       >
         <svg
           width="24"
@@ -24,7 +24,7 @@
       <span
         @click="activeSection = 1"
         :class="activeSection === 1 ? 'active text-white' : ' text-primary'"
-        class="flex justify-between px-5 py-[10px] cursor-pointer"
+        class="flex justify-between px-5 py-[5px] cursor-pointer"
       >
         <svg
           width="24"
@@ -45,7 +45,7 @@
       <span
         @click="activeSection = 2"
         :class="activeSection === 2 ? 'active text-white' : ' text-primary'"
-        class="flex justify-between px-5 py-[10px] cursor-pointer"
+        class="flex justify-between px-5 py-[5px] cursor-pointer"
       >
         <svg
           width="24"
@@ -72,7 +72,7 @@
             activeCategories === -1 ? 'active text-white' : 'text-primary'
           "
           @click="getCategories({name:''}, -1)"
-          class="flex justify-between px-5 py-[10px] cursor-pointer"
+          class="flex justify-between px-5 py-[5px] cursor-pointer category"
         >
           <span class=""> All </span>
           <span class=""> {{ total}} </span>
@@ -83,7 +83,7 @@
             activeCategories === index ? 'active text-white' : 'text-primary'
           "
           @click="getCategories(cat, index)"
-          class="flex justify-between px-5 py-[10px] cursor-pointer"
+          class="flex justify-between px-5 py-[5px] cursor-pointer category"
           v-for="(cat, index) in categories"
           :key="index"
         >
@@ -130,8 +130,20 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 .active {
   background: linear-gradient(91.16deg, #3d6f35 0%, #c5a811 100%);
+}
+
+.active.category {
+  border-image-source: linear-gradient(to left, #c5a811, #3d6f35) !important;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  color: black;
+  background: unset;
 }
 
 .active svg {

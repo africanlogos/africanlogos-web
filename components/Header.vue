@@ -95,13 +95,32 @@
           <span
             @click="toggleLeftBar"
             :class="leftBarIsOpen ? 'active' : ''"
-            class="left_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative mr-6 cursor-pointer"
+            class="
+              left_shell
+              shell
+              w-6
+              h-[22px]
+              inline-block
+              bg-[#C4C4C4]
+              relative
+              mr-6
+              cursor-pointer
+            "
           >
           </span>
           <span
             @click="toogleRightBar"
             :class="rightBarIsOpen ? 'active' : ''"
-            class="right_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative cursor-pointer"
+            class="
+              right_shell
+              shell
+              w-6
+              h-[22px]
+              inline-block
+              bg-[#C4C4C4]
+              relative
+              cursor-pointer
+            "
           >
           </span>
         </div>
@@ -132,6 +151,33 @@
     >
       <a href="" class="bg-primary text-white px-6 py-4 cursor-pointer">
         Contribuer
+      </a>
+
+      <a
+        @click.prevent="toggleBanner"
+        href=""
+        class="
+          bg-[#C5A811]
+          w-10
+          h-10
+          inline-block
+          rounded-1xl
+          speaker
+          gradient-background
+        "
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.11617 2.34448C3.15346 2.34448 2.35273 3.14243 2.35273 4.1062L2.34412 19.9789L5.871 16.452H18.2151C19.1789 16.452 19.9785 15.6523 19.9785 14.6886V4.10792C19.9785 3.14415 19.1789 2.34448 18.2151 2.34448H4.11617ZM4.11617 4.10792H18.2151V14.6886H5.14082L4.111 15.7184L4.11617 4.10792ZM5.871 6.75308V8.51653H7.63444V6.75308H5.871ZM9.39788 6.75308V8.51653H16.4516V6.75308H9.39788ZM5.871 10.28V12.0434H7.63444V10.28H5.871ZM9.39788 10.28V12.0434H16.4516V10.28H9.39788Z"
+            fill="white"
+          />
+        </svg>
       </a>
     </div>
   </section>
@@ -170,6 +216,9 @@ export default {
   methods: {
     toggleLeftBar() {
       this.$store.commit("toggleLeftBar");
+    },
+    toggleBanner() {
+      this.$store.commit("toggleBanner");
     },
     toogleRightBar() {
       this.$store.commit("toggleRightBar");
@@ -278,5 +327,47 @@ export default {
 .left_shell.active::after {
   /* background: #3D6F35; */
   transform: translateX(8px);
+}
+
+@property --myColor1 {
+  syntax: "<color>";
+  initial-value: #3d6f35;
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: "<color>";
+  initial-value: #c5a811;
+  inherits: false;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-background {
+  background: linear-gradient(260deg, #3d6f35, #c5a811, #3d6f35, #3d6f35);
+  background-size: 180% 180%;
+  animation: gradient-animation 3s ease infinite;
+}
+
+.speaker {
+  border-radius: 10px;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  padding-left: 4px;
+  align-items: center;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>
