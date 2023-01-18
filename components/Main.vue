@@ -76,7 +76,7 @@ export default {
   padding-left: 269px;
 }
 
-.content.panel-left-open {
+.content.panel-right-open {
   padding-right: 269px;
 }
 .content {
