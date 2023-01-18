@@ -1,7 +1,27 @@
 <template>
-  <section class="h-[100px] flex border-[#e4e4e4] border-x-0 border-b-2">
-    <div class="bg-secondary flex items-center w-[272px] justify-center">
-      <span>
+  <section
+    class="
+      lg:h-[100px]
+      flex
+      lg:flex-row
+      flex-col
+      border-[#e4e4e4] border-x-0 border-b-2
+    "
+  >
+    <div
+      class="
+        bg-secondary
+        flex
+        items-center
+        w-full
+        lg:w-[272px] lg:justify-center
+        justify-between
+        px-6
+        py-4
+        lg:p-0
+      "
+    >
+      <span class="flex items-center">
         <svg
           width="40"
           height="40"
@@ -31,9 +51,8 @@
             fill="white"
           />
         </svg>
+        <span class="inline-block ml-3 mr-10 font-bold"> African Logos </span>
       </span>
-
-      <span class="inline-block ml-3 mr-10"> African Logos </span>
 
       <span class="cursor-pointer" @click="toggleLeftBar">
         <svg
@@ -51,7 +70,19 @@
       </span>
     </div>
 
-    <div class="flex justify-between w-full flex-1 pr-10">
+    <div
+      class="
+        flex
+        justify-between
+        w-full
+        lg:flex-1 lg:pr-10
+        h-20
+        lg:h-auto
+        px-6
+        py-4
+        lg:p-0
+      "
+    >
       <Search />
 
       <div class="flex items-center ml-[50px]">
@@ -87,7 +118,16 @@
         </div>
 
         <span
-          class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-5 mr-8"
+          class="
+            divider
+            last-divider
+            bg-[#E4E4E4]
+            inline-block
+            h-[40px]
+            w-[2px]
+            ml-5
+            mr-8
+          "
         >
         </span>
 
@@ -126,7 +166,7 @@
         </div>
 
         <span
-          class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-8 mr-9"
+          class="divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] lg:ml-8 lg:mr-9 mx-5"
         >
         </span>
 
@@ -147,7 +187,15 @@
     </div>
 
     <div
-      class="bg-secondary flex items-center w-[272px] justify-center ml-auto"
+      class="
+        bg-secondary
+        lg:flex
+        hidden
+        items-center
+        w-[272px]
+        justify-center
+        ml-auto
+      "
     >
       <a href="" class="bg-primary text-white px-6 py-4 cursor-pointer">
         Contribuer
@@ -322,6 +370,13 @@ export default {
 
 .left_shell.active {
   background: #3d6f35;
+}
+
+@media screen and (max-width: 1024px) {
+  .shell,
+  .last-divider {
+    display: none;
+  }
 }
 
 .left_shell.active::after {

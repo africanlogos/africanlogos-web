@@ -1,5 +1,5 @@
 <template>
-  <section class="flex items-center pl-[51px] w-[20%]">
+  <section class="flex items-center lg:pl-[51px] w-[20%]">
     <span class="inline-block mr-3">
       <svg
         width="24"

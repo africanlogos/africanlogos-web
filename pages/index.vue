@@ -1,8 +1,9 @@
 <template>
   <section>
-    <Banner v-if="bannerIsOpen" />
+    
+    <Banner v-if="!bannerIsOpen" />
     <Header @filter-by-countryes="filterByCountryes" />
-    <section class="flex">
+    <section class="flex" v-if="false">
 
       <LeftBar
         v-if="leftBarIsOpen"
