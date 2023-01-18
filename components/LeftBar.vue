@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-secondary w-[272px] flex-shrink-0">
+  <section class="bg-secondary left-0 fixed pt-28 w-[272px] flex-shrink-0 z-10">
     <div>
       <span
         @click="activeSection = 0"

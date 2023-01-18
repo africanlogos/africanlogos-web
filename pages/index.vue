@@ -3,7 +3,7 @@
     
     <Banner v-if="!bannerIsOpen" />
     <Header @filter-by-countryes="filterByCountryes" />
-    <section class="flex" v-if="false">
+    <section class="flex">
 
       <LeftBar
         v-if="leftBarIsOpen"

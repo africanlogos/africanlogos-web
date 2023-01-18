@@ -1,6 +1,10 @@
 <template>
   <section
-    class="p-3 overflow-scroll content h-screen"
+    class="p-3 overflow-scroll content pt-32 h-screen justify-center panel-open"
+    :class="{
+      'panel-left-open': leftBarIsOpen,
+      'panel-right-open': rightBarIsOpen,
+    }"
     v-if="results.length > 0"
   >
     <div
@@ -60,11 +64,21 @@ export default {
     leftBarIsOpen() {
       return this.$store.state.leftBarIsOpen;
     },
+    rightBarIsOpen() {
+      return this.$store.state.rightBarIsOpen;
+    },
   },
 };
 </script>
 
 <style scoped>
+.content.panel-left-open {
+  padding-left: 269px;
+}
+
+.content.panel-left-open {
+  padding-right: 269px;
+}
 .content {
   width: 100%;
   display: grid;
@@ -75,7 +89,7 @@ export default {
   /* justify-content: center; */
   overflow: auto;
   z-index: 3;
-  height: 90vh;
+  /* height: 90vh; */
   margin-bottom: 100px;
 }
 
@@ -91,5 +105,13 @@ export default {
   border: 10px solid;
   border-image-slice: 1;
   border-width: 3px;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    padding-top: 40px;
+    justify-content: center;
+    row-gap: 60px;
+  }
 }
 </style>

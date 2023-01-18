@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-secondary w-[272px] p-6 ml-auto flex-shrink-0">
+  <section class="bg-secondary fixed right-0  pt-28 w-[272px] p-6 ml-auto flex-shrink-0 h-screen overflow-scroll z-10">
     <div v-if="categorie">
       <h4 class="text-[16px] text-center mt-[22px]">
         <span class="capitalize">{{ name }} </span> ∙ {{ country }} ∙

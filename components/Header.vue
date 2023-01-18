@@ -3,7 +3,7 @@
     class="
       lg:h-[100px]
       flex
-      lg:flex-row
+      lg:flex-row fixed z-20 left-0 right-0
       flex-col
       border-[#e4e4e4] border-x-0 border-b-2
     "
@@ -73,7 +73,7 @@
     <div
       class="
         flex
-        justify-between
+        justify-between bg-white
         w-full
         lg:flex-1 lg:pr-10
         h-20
