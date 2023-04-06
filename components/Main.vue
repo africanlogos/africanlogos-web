@@ -79,6 +79,8 @@ export default {
 .content.panel-right-open {
   padding-right: 269px;
 }
+
+
 .content {
   width: 100%;
   display: grid;
