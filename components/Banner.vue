@@ -1,10 +1,10 @@
 <template>
   <section
     :class="index === 0 ? 'banner-first-slide-bg' : 'banner-second-slide-bg'"
-    class="bg-[#C5A811] banner h-60 p-4 justify-between"
+    class="bg-[#C5A811] banner h-60 p-4 justify-between pt-10"
   >
     <span
-      class="close absolute right-[50px] top-[40px] cursor-pointer z-30"
+      class="close absolute p-2 right-[50px] top-[40px] cursor-pointer z-30"
       @click="toggleBanner"
     >
       <svg
@@ -55,10 +55,11 @@
         </p>
       </div>
 
-      <div class="relative left-[25px]">
+      <div class="relative left-[25px] top-[-10px]">
         <p class="text-white countries-title relative top-[-10px]">
           {{ index === 0 ? "Pays disponibles" : "Contributeurs" }}
         </p>
+
         <div
           class="flex relative transition-all duration-[.8s]"
           :class="
@@ -89,11 +90,16 @@
           >
             <img
               :src="avatar"
-              class="w-10 h-10 rounded-full border border-[#C4C4C4]"
+              class="w-[44px] h-[44px] rounded-full border border-[#C4C4C4]"
             />
           </span>
         </div>
       </div>
+    </div>
+
+    <div class=" flex absolute  bottom-[10px] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <span class=" w-3 h-3 mr-6 cursor-pointer circle rounded-full block" :class="{ 'active': index === 1 }"></span>
+      <span class=" w-3 h-3 cursor-pointer circle rounded-full block" :class="{ 'active': index === 0 }"></span>
     </div>
   </section>
 </template>
@@ -144,7 +150,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.index = this.index === 0 ? 1 : 0;
-    }, 3000);
+    }, 5500);
   },
 
   methods: {
@@ -159,6 +165,7 @@ export default {
 .banner {
   background-blend-mode: screen, normal;
   background-size: cover;
+  position: relative;
 }
 
 .banner-first-slide-bg {
@@ -185,6 +192,19 @@ export default {
 
 .contributors.active-banner {
   transform: translateX(0px);
+  opacity: 1;
+}
+
+.close:hover {
+  background: rgba(228, 228, 228, 0.3);
+}
+.circle {
+  background: #c4c4c4;
+  opacity: 0.4;
+}
+
+.circle.active {
+  background: linear-gradient(180deg, #c4c4c4 0%, #ffffff 100%);
   opacity: 1;
 }
 </style>

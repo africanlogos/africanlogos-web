@@ -1,0 +1,22 @@
+/* width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-auto-rows: auto;
+    gap: 25px;
+    grid-template-rows: 200px 200px;
+    /* justify-content: center; */
+    overflow: auto;
+    z-index: 3;
+    /* height: 90vh; */
+    margin-bottom: 100px; 
+    padding-top: 125px;
+    */
+
+
+    - titre contributeur pas aligné
+
+    - dropdown pays
+
+    - tout les pays selectionner par defaut
+
+    - bordure variante actif et inactif

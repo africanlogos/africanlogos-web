@@ -1,6 +1,6 @@
 export const state = () => ({
   leftBarIsOpen: true,
-  bannerIsOpen: true,
+  bannerIsOpen: false,
   rightBarIsOpen: true,
   searchValue: "",
 });

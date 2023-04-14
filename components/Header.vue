@@ -1,25 +1,9 @@
 <template>
   <section
-    class="
-      lg:h-[100px]
-      flex
-      lg:flex-row fixed z-20 left-0 right-0
-      flex-col
-      border-[#e4e4e4] border-x-0 border-b-2
-    "
+    class="lg:h-[100px] flex lg:flex-row fixed z-20 left-0 right-0 flex-col border-[#e4e4e4] border-x-0 border-b-2"
   >
     <div
-      class="
-        bg-secondary
-        flex
-        items-center
-        w-full
-        lg:w-[272px] lg:justify-center
-        justify-between
-        px-6
-        py-4
-        lg:p-0
-      "
+      class="bg-secondary flex items-center w-full lg:w-[272px] lg:justify-center justify-between px-6 py-4 lg:p-0"
     >
       <span class="flex items-center">
         <svg
@@ -71,17 +55,7 @@
     </div>
 
     <div
-      class="
-        flex
-        justify-between bg-white
-        w-full
-        lg:flex-1 lg:pr-10
-        h-20
-        lg:h-auto
-        px-6
-        py-4
-        lg:p-0
-      "
+      class="flex justify-between bg-white w-full lg:flex-1 lg:pr-3 h-20 lg:h-auto px-6 py-4 lg:p-0"
     >
       <Search />
 
@@ -118,16 +92,7 @@
         </div>
 
         <span
-          class="
-            divider
-            last-divider
-            bg-[#E4E4E4]
-            inline-block
-            h-[40px]
-            w-[2px]
-            ml-5
-            mr-8
-          "
+          class="divider last-divider bg-[#E4E4E4] inline-block h-[40px] w-[2px] ml-5 mr-8"
         >
         </span>
 
@@ -135,32 +100,13 @@
           <span
             @click="toggleLeftBar"
             :class="leftBarIsOpen ? 'active' : ''"
-            class="
-              left_shell
-              shell
-              w-6
-              h-[22px]
-              inline-block
-              bg-[#C4C4C4]
-              relative
-              mr-6
-              cursor-pointer
-            "
+            class="left_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative mr-6 cursor-pointer"
           >
           </span>
           <span
             @click="toogleRightBar"
             :class="rightBarIsOpen ? 'active' : ''"
-            class="
-              right_shell
-              shell
-              w-6
-              h-[22px]
-              inline-block
-              bg-[#C4C4C4]
-              relative
-              cursor-pointer
-            "
+            class="right_shell shell w-6 h-[22px] inline-block bg-[#C4C4C4] relative cursor-pointer"
           >
           </span>
         </div>
@@ -171,15 +117,15 @@
         </span>
 
         <div class="social_media">
-          <span class="inline-block w-7 h-7">
+          <span class="inline-block icons w-7 h-7">
             <twitter-icon />
           </span>
 
-          <span class="inline-block w-7 h-7 mx-5">
+          <span class="inline-block icons w-7 h-7 mx-5">
             <github-icon />
           </span>
 
-          <span class="inline-block w-7 h-7">
+          <span class="inline-block icons w-7 h-7">
             <arobase-icon />
           </span>
         </div>
@@ -187,15 +133,7 @@
     </div>
 
     <div
-      class="
-        bg-secondary
-        lg:flex
-        hidden
-        items-center
-        w-[272px]
-        justify-center
-        ml-auto
-      "
+      class="bg-secondary lg:flex hidden items-center w-[272px] justify-center ml-auto"
     >
       <a href="" class="bg-primary text-white px-6 py-4 cursor-pointer">
         Contribuer
@@ -204,15 +142,7 @@
       <a
         @click.prevent="toggleBanner"
         href=""
-        class="
-          bg-[#C5A811]
-          w-10
-          h-10
-          inline-block
-          rounded-1xl
-          speaker
-          gradient-background
-        "
+        class="bg-[#C5A811] w-10 h-10 inline-block rounded-1xl speaker gradient-background"
       >
         <svg
           width="22"
@@ -293,43 +223,43 @@ export default {
       dropdownCountryIsOpen: false,
       countryItems: [
         {
+          name: "Tout les pays",
+          code: "",
+        },
+        {
           name: "Benin",
-          url: "https://countryflagsapi.com/png/bj",
+          url: "https://flagsapi.com/BJ/shiny/64.png",
           code: "bj",
         },
         {
           name: "Ivory Coast",
-          url: "https://countryflagsapi.com/png/ci",
+          url: "https://flagsapi.com/CI/shiny/64.png",
           code: "ci",
         },
         {
           name: "Ghana",
-          url: "https://countryflagsapi.com/png/gh",
+          url: "https://flagsapi.com/GH/shiny/64.png",
           code: "gh",
         },
         {
           name: "South Africa",
-          url: "https://countryflagsapi.com/png/za",
+          url: "https://flagsapi.com/ZA/shiny/64.png",
           code: "za",
         },
         {
           name: "Nigeria",
-          url: "https://countryflagsapi.com/png/ng",
+          url: "https://flagsapi.com/NG/shiny/64.png",
           code: "ng",
         },
         {
           name: "Algeria",
-          url: "https://countryflagsapi.com/png/dz",
+          url: "https://flagsapi.com/DZ/shiny/64.png",
           code: "dz",
         },
         {
           name: "Togo",
-          url: "https://countryflagsapi.com/png/tg",
+          url: "https://flagsapi.com/TG/shiny/64.png",
           code: "tg",
-        },
-        {
-          name: "Tout les pays",
-          code: "",
         },
       ],
     };
@@ -424,5 +354,19 @@ export default {
   align-items: center;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
+.social_media {
+    display: flex;
+}
+.icons {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icons:hover {
+  background: rgba(220, 217, 207, 0.2);
+  cursor: pointer;
 }
 </style>

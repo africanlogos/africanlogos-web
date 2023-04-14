@@ -30,7 +30,7 @@
         "
         class="w-[140px] h-[110px] mb-8"
       />
-      <span class="capitalize"> {{ result.name }} </span>
+      <span class="capitalize"> {{ getCompanyName(result.icon) }} </span>
     </div>
   </section>
 </template>
@@ -59,6 +59,9 @@ export default {
       this.current = result.icon;
       this.$emit("get-svg", result);
     },
+    getCompanyName(name){
+        return name.replace("_", " ");
+    }
   },
   computed: {
     leftBarIsOpen() {

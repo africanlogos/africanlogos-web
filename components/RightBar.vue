@@ -1,8 +1,11 @@
 <template>
-  <section class="bg-secondary fixed right-0  pt-28 w-[272px] p-6 ml-auto flex-shrink-0 h-screen overflow-scroll z-10">
+  <section
+    class="bg-secondary fixed right-0 pt-28 w-[272px] p-6 ml-auto flex-shrink-0 h-screen overflow-scroll z-10"
+  >
     <div v-if="categorie">
       <h4 class="text-[16px] text-center mt-[22px]">
-        <span class="capitalize">{{ name }} </span> ∙ {{ country }} ∙
+        <span class="capitalize">{{ getCompanyName(name) }} </span> ∙
+        {{ country }} ∙
         {{ categorie }}
       </h4>
 
@@ -15,7 +18,7 @@
           :src="
             require(`@/assets/icons/${this.country}/${this.categorie}/${this.logo}/${this.logo}_${currentVariant}.svg`)
           "
-          class=""
+          class="h-[100px] w-[100px]"
         />
       </div>
 
@@ -32,7 +35,8 @@
           v-for="(variant, index) in variants"
           :key="index"
           @click="setVariant(variant)"
-          class="border w-8 h-8 grid place-items-center ml-4 cursor-pointer"
+          :class="{ active: currentVariant === variant }"
+          class="border w-8 h-8 variant grid place-items-center ml-4 cursor-pointer"
         >
           {{ index + 1 }}
         </span>
@@ -58,47 +62,21 @@
         <div class="flex">
           <span
             @click="download('svg')"
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              mr-2
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border text-primary font-medium mr-2 cursor-pointer"
           >
             SVG
           </span>
 
           <span
             @click="download('png')"
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              mr-2
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border text-primary font-medium mr-2 cursor-pointer"
           >
             PNG
           </span>
 
           <span
             @click="download('eps')"
-            class="
-              inline-block
-              px-4
-              py-2
-              border-primary border-2
-              text-primary
-              font-medium
-              cursor-pointer
-            "
+            class="inline-block px-4 py-2 border-primary border text-primary font-medium cursor-pointer"
           >
             EPS
           </span>
@@ -106,13 +84,33 @@
       </div>
 
       <div class="h-[2px] bg-[#E4E4E4] mt-[22px] mb-[16px]"></div>
+      <div class="flex">
+        <span @click="copySvg"
+          class="inline-block px-4 py-2 mr-6 border-primary border text-primary font-medium cursor-pointer"
+        >
+          Copier
+        </span>
+
+        <div class="flex items-center">
+          <div
+            @click="setPrettify"
+            class="prettify mr-2"
+            :class="{ active: isPrettyfy }"
+          >
+            <span></span>
+          </div>
+          <span class="font-bold text-[#A6A296] text-sm">Prettify</span>
+        </div>
+      </div>
       <div>
         <pre>
-        <code :key="currentSvg" v-highlight class="html p-5 whitespace-pre-wrap max-h-[300px]" id="content">{{ (currentSvg) }}
+        <code :key="svgFormatted" v-highlight class="html p-5 max-h-[300px]" id="content">{{ (svgFormatted) }}
         </code>
       </pre>
       </div>
     </div>
+
+  
 
     <div v-else class="flex flex-col items-center mt-36 justify-center">
       <span>
@@ -131,13 +129,16 @@
       </span>
 
       <span class="text-center inline-block text-xl mt-9 text-[#A6A296]">
-        Select a logo to download
+        Select a logo to download 
       </span>
     </div>
   </section>
 </template>
 
 <script>
+import prettier from "prettier";
+import htmlParser from "prettier/parser-html";
+
 export default {
   components: {},
   props: {
@@ -168,6 +169,8 @@ export default {
   },
   data() {
     return {
+      isPrettyfy: false,
+      rawSvg: "",
       currentVariant: "variant1",
       categories: [
         {
@@ -181,7 +184,28 @@ export default {
     };
   },
 
+  computed: {
+    svgFormatted(){
+        if (this.isPrettyfy) {
+        return prettier.format(this.currentSvg, {
+          parser: "html",
+          plugins: [htmlParser],
+        });
+      } else {
+        return this.currentSvg;
+      }
+    }
+  },
   methods: {
+    copySvg(){
+        navigator.clipboard.writeText(this.svgFormatted);
+    },
+    setPrettify() {
+      this.isPrettyfy = !this.isPrettyfy;
+    },
+    getCompanyName(name) {
+      return name.replace("_", " ");
+    },
     download(type) {
       const link = document.createElement("a");
       link.download = this.name;
@@ -193,6 +217,10 @@ export default {
     setVariant(variant) {
       this.currentVariant = variant;
     },
+  },
+
+  mounted() {
+    this.rawSvg = this.currentSvg
   },
 };
 </script>
@@ -287,5 +315,40 @@ export default {
   .hljs-selector-tag {
     font-weight: bold;
   }
+}
+
+.variant.active {
+  border-image-source: linear-gradient(to left, #c5a811, #3d6f35) !important;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  color: black;
+  background: unset;
+}
+
+.prettify {
+  border: #a6a296 8px solid;
+  border-radius: 3px;
+  width: 45px;
+  height: 32px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.prettify > span {
+  background: #a6a296;
+  display: block;
+  width: 12px;
+  height: 12px;
+  transition: all 0.5s;
+}
+
+.prettify.active {
+  border: #3d6f35 8px solid;
+}
+
+.prettify.active > span {
+  transform: translateX(12px);
+  background: #3d6f35;
 }
 </style>
